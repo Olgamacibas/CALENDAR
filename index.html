@@ -5,21 +5,19 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
 <title>Мой Календарь</title>
 
+<!-- PWA Manifest и Service Worker -->
+<link rel="manifest" href="manifest.json">
+<script>
+  if ('serviceWorker' in navigator) {
+    navigator.serviceWorker.register('./sw.js');
+  }
+</script>
+
 <!-- Служебные настройки для превращения в приложение -->
 <meta name="mobile-web-app-capable" content="yes">
 <meta name="apple-mobile-web-app-capable" content="yes">
 <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
 <meta name="theme-color" content="#006B6C">
-
-<!-- Встроенный Web Manifest -->
-<link rel="manifest" href="data:application/manifest+json;utf8,{
-  %22name%22:%20%22%D0%9C%D0%BE%D0%B9%20%D0%9A%D0%B0%D0%BB%D0%B5%D0%BD%D0%B4%D0%B0%D1%80%D1%8C%22,
-  %22short_name%22:%20%22%D0%9A%D0%B0%D0%BB%D0%B5%D0%BD%D0%B4%D0%B0%D1%80%D1%8C%22,
-  %22start_url%22:%20%22.%22,
-  %22display%22:%20%22standalone%22,
-  %22background_color%22:%20%22%23004546%22,
-  %22theme_color%22:%20%22%23006B6C%22
-}">
 
 <style>
   * { box-sizing: border-box; }
