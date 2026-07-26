@@ -13,7 +13,7 @@
   }
 </script>
 
-<!-- Служебные настройки для превращения в приложение -->
+<!-- Служебные настройки -->
 <meta name="mobile-web-app-capable" content="yes">
 <meta name="apple-mobile-web-app-capable" content="yes">
 <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
@@ -263,12 +263,25 @@
 
 </div>
 
-<!-- Настройки темы -->
+<!-- Настройки темы и страны -->
 <div class="modal" id="settingsModal">
   <div class="modal-content">
-    <h3 style="margin-top:0;">🎨 Тема оформления</h3>
+    <h3 style="margin-top:0;">⚙️ Настройки</h3>
+    
     <div class="input-group" style="margin-bottom: 12px;">
-      <label>Выберите стиль</label>
+      <label>Страна праздников 🌍</label>
+      <select id="countrySelect" onchange="changeCountry(this.value)">
+        <option value="LV">Латвия 🇱🇻</option>
+        <option value="DE">Германия 🇩🇪</option>
+        <option value="EE">Эстония 🇪🇪</option>
+        <option value="LT">Литва 🇱🇹</option>
+        <option value="PL">Польша 🇵🇱</option>
+        <option value="NONE">Без праздников 🚫</option>
+      </select>
+    </div>
+
+    <div class="input-group" style="margin-bottom: 12px;">
+      <label>Выберите стиль 🎨</label>
       <select id="themeSelect" onchange="changeTheme(this.value)">
         <option value="green">Холодный изумруд 🌲</option>
         <option value="gray">Темный графит 🩶</option>
@@ -278,12 +291,13 @@
         <option value="dark">Глубокая ночь 🌙</option>
       </select>
     </div>
+    
     <button class="icon-btn" style="width:100%; margin-top:6px;" onclick="closeModal('settingsModal')">Закрыть</button>
   </div>
 </div>
 
 <script>
-const events2026 = {
+const events2026_LV = {
   "1-1": "Jaungada diena (Svētki)", "1-2": "Pārceltā brīvdiena", "1-10": "Atstrāde (Sestdiena)",
   "4-2": "Pirmssvētku diena (-1 stunda)", "4-3": "Lielā Piektdiena (Svētki)", "4-5": "Lieldienas (Svētki)",
   "4-6": "Otrās Lieldienas (Svētki)", "4-30": "Pirmssvētku diena (-1 stunda)", "5-1": "Darba svētki (Svētki)",
@@ -302,16 +316,43 @@ let currentMonth = now.getMonth();
 let activeKey = "";
 let activeShortKey = "";
 
+let selectedCountry = localStorage.getItem('myCalendarCountry') || 'LV';
+let apiHolidays = {};
+
 let myNotes = JSON.parse(localStorage.getItem('myCalendarNotes') || '{}');
 
-function init() {
+async function init() {
   populateYears();
-  renderCalendar(currentYear, currentMonth);
-  calculateShift();
   
   let savedTheme = localStorage.getItem('myCalendarTheme') || 'green';
   document.getElementById('themeSelect').value = savedTheme;
   changeTheme(savedTheme);
+
+  document.getElementById('countrySelect').value = selectedCountry;
+  
+  await fetchHolidays(currentYear);
+  renderCalendar(currentYear, currentMonth);
+  calculateShift();
+}
+
+async function fetchHolidays(year) {
+  apiHolidays = {};
+  if (selectedCountry === 'NONE') return;
+  if (selectedCountry === 'LV' && year === 2026) return; // Для Латвии 2026 используем точную ручную разметку
+
+  try {
+    let res = await fetch(`https://date.nager.at/api/v3/PublicHolidays/${year}/${selectedCountry}`);
+    if (res.ok) {
+      let data = await res.json();
+      data.forEach(item => {
+        let [y, m, d] = item.date.split('-').map(Number);
+        let key = `${m}-${d}`;
+        apiHolidays[key] = item.localName || item.name;
+      });
+    }
+  } catch(e) {
+    console.log("Ошибка загрузки праздников:", e);
+  }
 }
 
 function populateYears() {
@@ -356,11 +397,17 @@ function renderCalendar(year, month) {
 
         let labels = [];
 
-        if (year === 2026 && events2026[shortKey]) {
-          labels.push(events2026[shortKey]);
+        // Проверка праздников Латвии 2026
+        if (selectedCountry === 'LV' && year === 2026 && events2026_LV[shortKey]) {
+          labels.push(events2026_LV[shortKey]);
           if (["1-1","1-2","4-3","4-5","4-6","5-1","5-4","6-22","6-23","6-24","11-18","12-24","12-25","12-26","12-31"].includes(shortKey)) cls.push('holiday');
           else if (["1-10","6-27"].includes(shortKey)) cls.push('work-sat');
           else if (["4-2","4-30","6-19","11-17","12-23","12-30"].includes(shortKey)) cls.push('pre-hol');
+        } 
+        // Проверка праздников через API для других стран/годов
+        else if (apiHolidays[shortKey]) {
+          labels.push(apiHolidays[shortKey]);
+          cls.push('holiday');
         }
 
         if (myNotes[fullKey]) {
@@ -399,8 +446,10 @@ function openPopover(key, shortKey, day, month, year) {
 
   let allEvents = [];
 
-  if (year === 2026 && events2026[shortKey]) {
-    allEvents.push(`🎉 <b>Гос. событие:</b> ${events2026[shortKey]}`);
+  if (selectedCountry === 'LV' && year === 2026 && events2026_LV[shortKey]) {
+    allEvents.push(`🎉 <b>Гос. событие:</b> ${events2026_LV[shortKey]}`);
+  } else if (apiHolidays[shortKey]) {
+    allEvents.push(`🎉 <b>Праздник:</b> ${apiHolidays[shortKey]}`);
   }
 
   if (myNotes[key]) {
@@ -457,6 +506,13 @@ function changeTheme(theme) {
   localStorage.setItem('myCalendarTheme', theme);
 }
 
+async function changeCountry(country) {
+  selectedCountry = country;
+  localStorage.setItem('myCalendarCountry', country);
+  await fetchHolidays(currentYear);
+  renderCalendar(currentYear, currentMonth);
+}
+
 function changeMonth(delta) {
   currentMonth += delta;
   if (currentMonth > 11) { currentMonth = 0; currentYear++; }
@@ -465,8 +521,9 @@ function changeMonth(delta) {
   closePopover();
 }
 
-function onYearChange() {
+async function onYearChange() {
   currentYear = parseInt(document.getElementById('yearSelect').value);
+  await fetchHolidays(currentYear);
   renderCalendar(currentYear, currentMonth);
   closePopover();
 }
