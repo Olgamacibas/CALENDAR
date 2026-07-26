@@ -13,227 +13,467 @@
   }
 </script>
 
-<!-- Служебные настройки -->
 <meta name="mobile-web-app-capable" content="yes">
 <meta name="apple-mobile-web-app-capable" content="yes">
 <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
 <meta name="theme-color" content="#006B6C">
 
+<!-- Подключаем шрифты из Google Fonts -->
+<link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;500;700&family=Open+Sans:wght@400;600;700&family=Montserrat:wght@400;500;700&family=Lato:wght@400;700&family=Inter:wght@400;500;700&family=Playfair+Display:wght@500;700&family=Merriweather:wght@400;700&family=Comfortaa:wght@500;700&family=Nunito:wght@400;600;700&family=Ubuntu:wght@400;500;700&display=swap" rel="stylesheet">
+
 <style>
   * { box-sizing: border-box; }
 
-  /* Базовые цвета и твои Pantone оттенки для рамок (2 пикселя) */
   :root {
-    --bg-color: #f4f6f8; --card-bg: #ffffff; --primary: #1a252f;
-    --text-color: #2c3e50; --subtext: #666666; --border-color: #dddddd;
-    --input-bg: #fafafa; --accent: #3498db;
-    
-    --holiday-border: #9B113F; /* Pantone 215 */
-    --pre-border:     #6D8291; /* Pantone 5425 */
-    --work-border:    #00A896; /* Pantone 3262 */
+    --bg-color: #e2e8f0; 
+    --card-bg: #ffffff; 
+    --primary: #1a252f;
+    --text-color: #2c3e50; 
+    --subtext: #666666; 
+    --border-color: #dddddd;
+    --input-bg: #f4f6f8; 
+    --accent: #4a6572; 
+    --accent-text: #ffffff;
 
-    --today-bg: #e3f2fd; --today-border: #2196f3;
-    --note-bg: #e3f2fd; --note-text: #0d47a1;
+    --holiday-border: #9B113F; 
+    --pre-border:     #6D8291; 
+    --work-border:    #00A896; 
+
+    --today-bg: #eaf2f8; 
+    --today-border: #4a6572;
+    --note-bg: #e2e8f0; 
+    --note-text: #1a252f;
+    
+    --font-family: 'Nunito', sans-serif;
+    --font-scale: 1;
+
+    --main-shadow: 0 15px 30px rgba(0, 0, 0, 0.15), 0 5px 10px rgba(0, 0, 0, 0.05);
+    --bg-gradient: radial-gradient(circle at center, var(--bg-color) 0%, rgba(0,0,0,0.1) 100%);
+  }
+
+  /* Голубая тема */
+  [data-theme="blue-light"] {
+    --bg-color: #8da4c4; 
+    --card-bg: #9bb2d4; 
+    --primary: #111e2e;
+    --text-color: #111e2e; 
+    --subtext: #3d5066; 
+    --border-color: #7890b0; 
+    --input-bg: #b0c4e0;
+    --accent: #4a6585; 
+    --accent-text: #ffffff;
+    --today-bg: #cad8ec; 
+    --today-border: #111e2e;
+    --note-bg: #b0c4e0; 
+    --note-text: #111e2e;
+    --main-shadow: 0 16px 32px rgba(20, 35, 55, 0.25);
+    --bg-gradient: radial-gradient(circle at center, #9bb2d4 0%, #687e9c 100%);
+  }
+
+  /* Синяя тема */
+  [data-theme="blue-dark"] {
+    --bg-color: #08101e; 
+    --card-bg: #0e1b2e; 
+    --primary: #ffffff;
+    --text-color: #e2e8f0; 
+    --subtext: #8294b0; 
+    --border-color: #1e3048; 
+    --input-bg: #15243b;
+    --accent: #1e3d6b; 
+    --accent-text: #ffffff;
+    --today-bg: #1e3048; 
+    --today-border: #8294b0;
+    --note-bg: #15243b; 
+    --note-text: #e2e8f0;
+    --main-shadow: 0 20px 40px rgba(0,0,0,0.8);
+    --bg-gradient: radial-gradient(circle at center, #0e1b2e 0%, #03060c 100%);
   }
 
   [data-theme="dark"] {
-    --bg-color: #121212; --card-bg: #1e1e1e; --primary: #ecf0f1;
-    --text-color: #e0e0e0; --subtext: #aaa; --border-color: #333; --input-bg: #2a2a2a;
-    --today-bg: #1565c0; --today-border: #64b5f6;
-    --note-bg: #0d47a1; --note-text: #e3f2fd;
+    --bg-color: #121212; 
+    --card-bg: #1e1e1e; 
+    --primary: #ecf0f1;
+    --text-color: #e0e0e0; 
+    --subtext: #aaa; 
+    --border-color: #333333; 
+    --input-bg: #2a2a2a;
+    --accent: #37474f; 
+    --accent-text: #ffffff;
+    --today-bg: #2c3e50; 
+    --today-border: #7f8c8d;
+    --note-bg: #2a2a2a; 
+    --note-text: #e0e0e0;
+    --main-shadow: 0 20px 40px rgba(0,0,0,0.8);
+    --bg-gradient: radial-gradient(circle at center, #1e1e1e 0%, #050505 100%);
   }
 
   [data-theme="green"] {
-    --bg-color: #004546; --card-bg: #006B6C; --primary: #ffffff;
-    --text-color: #e0f2f1; --subtext: #80cbc4; --border-color: #00897b; --input-bg: #005657;
-    --accent: #26a69a; --today-bg: #00897b; --today-border: #80cbc4;
-    --note-bg: #004546; --note-text: #e0f2f1;
+    --bg-color: #003637; 
+    --card-bg: #006B6C; 
+    --primary: #ffffff;
+    --text-color: #e0f2f1; 
+    --subtext: #80cbc4; 
+    --border-color: #00897b; 
+    --input-bg: #005657;
+    --accent: #004d40; 
+    --accent-text: #ffffff;
+    --today-bg: #00897b; 
+    --today-border: #80cbc4;
+    --note-bg: #004546; 
+    --note-text: #e0f2f1;
+    --main-shadow: 0 18px 36px rgba(0, 20, 20, 0.5);
+    --bg-gradient: radial-gradient(circle at center, #005657 0%, #002223 100%);
   }
 
   [data-theme="gray"] {
-    --bg-color: #3b444b; --card-bg: #5B6770; --primary: #ffffff;
-    --text-color: #f8f9fa; --subtext: #d1d5db; --border-color: #717d86; --input-bg: #4a545b;
-    --accent: #9aa4ac; --today-bg: #717d86; --today-border: #ffffff;
-    --note-bg: #4a545b; --note-text: #ffffff;
+    --bg-color: #2b3238; 
+    --card-bg: #5B6770; 
+    --primary: #ffffff;
+    --text-color: #f8f9fa; 
+    --subtext: #d1d5db; 
+    --border-color: #717d86; 
+    --input-bg: #4a545b;
+    --accent: #3b444b; 
+    --accent-text: #ffffff;
+    --today-bg: #717d86; 
+    --today-border: #ffffff;
+    --note-bg: #4a545b; 
+    --note-text: #ffffff;
+    --main-shadow: 0 18px 36px rgba(0,0,0,0.4);
+    --bg-gradient: radial-gradient(circle at center, #4a545b 0%, #1a1e22 100%);
   }
 
   [data-theme="light-gray"] {
-    --bg-color: #d2d7d9; --card-bg: #B2B8BB; --primary: #1c2326;
-    --text-color: #1a2124; --subtext: #455054; --border-color: #92999c; --input-bg: #c7cbce;
-    --accent: #58656a; --today-bg: #d2d7d9; --today-border: #1c2326;
-    --note-bg: #c7cbce; --note-text: #1a2124;
+    --bg-color: #bcbcbc; 
+    --card-bg: #B2B8BB; 
+    --primary: #1c2326;
+    --text-color: #1a2124; 
+    --subtext: #455054; 
+    --border-color: #92999c; 
+    --input-bg: #c7cbce;
+    --accent: #6c7a80; 
+    --accent-text: #ffffff;
+    --today-bg: #d2d7d9; 
+    --today-border: #1c2326;
+    --note-bg: #c7cbce; 
+    --note-text: #1a2124;
+    --main-shadow: 0 16px 30px rgba(0,0,0,0.25);
+    --bg-gradient: radial-gradient(circle at center, #d2d7d9 0%, #8d9498 100%);
   }
 
   [data-theme="pink"] {
-    --bg-color: #e8dee2; --card-bg: #D2C4C9; --primary: #382c30;
-    --text-color: #2b2024; --subtext: #59484f; --border-color: #b5a5ab; --input-bg: #dfd3d7;
-    --accent: #78616a; --today-bg: #e8dee2; --today-border: #382c30;
-    --note-bg: #dfd3d7; --note-text: #2b2024;
+    --bg-color: #d1c0c6; 
+    --card-bg: #D2C4C9; 
+    --primary: #382c30;
+    --text-color: #2b2024; 
+    --subtext: #59484f; 
+    --border-color: #b5a5ab; 
+    --input-bg: #dfd3d7;
+    --accent: #8c707a; 
+    --accent-text: #ffffff;
+    --today-bg: #e8dee2; 
+    --today-border: #382c30;
+    --note-bg: #dfd3d7; 
+    --note-text: #2b2024;
+    --main-shadow: 0 16px 32px rgba(60, 40, 50, 0.3);
+    --bg-gradient: radial-gradient(circle at center, #e8dee2 0%, #a39097 100%);
+  }
+
+  html, body {
+    height: 100vh;
+    margin: 0;
+    padding: 0;
+    overflow: hidden;
   }
 
   body {
-    font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
-    background-color: var(--bg-color); margin: 0; padding: 8px; color: var(--text-color);
-    -webkit-tap-highlight-color: transparent; width: 100vw; overflow-x: hidden;
+    font-family: var(--font-family);
+    background-color: var(--bg-color);
+    background-image: var(--bg-gradient); 
+    color: var(--text-color);
+    -webkit-tap-highlight-color: transparent; 
+    display: flex; 
+    flex-direction: column;
+    font-size: calc(14px * var(--font-scale));
   }
 
-  .container { width: 100%; max-width: 480px; margin: 0 auto; position: relative; }
+  .container { 
+    flex: 1; 
+    width: 100%; 
+    max-width: 600px; 
+    margin: 0 auto; 
+    position: relative;
+    display: flex; 
+    flex-direction: column; 
+    padding: 10px; 
+    padding-bottom: 90px;
+    height: 100%;
+  }
+
   .card {
-    background: var(--card-bg); border-radius: 16px; padding: 12px;
-    box-shadow: 0 4px 12px rgba(0,0,0,0.12); margin-bottom: 10px; width: 100%;
+    background: var(--card-bg); 
+    border-radius: 16px; 
+    padding: 10px;
+    box-shadow: var(--main-shadow); 
+    width: 100%;
+    border: 1px solid rgba(255, 255, 255, 0.08);
+  }
+
+  .view-section { display: none; flex: 1; flex-direction: column; height: 100%; }
+  .view-section.active { display: flex; }
+
+  #viewCalendar.active {
+    display: flex;
+    flex-direction: column;
+    height: 100%;
+  }
+  
+  #viewCalendar .card {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    margin-bottom: 0;
+    overflow: hidden;
   }
 
   .top-header { display: flex; justify-content: space-between; align-items: center; margin-bottom: 8px; }
-  h2 { margin: 0; font-size: 14px; font-weight: 700; color: var(--primary); text-transform: uppercase; }
+  h2 { margin: 0; font-size: calc(14px * var(--font-scale)); font-weight: 700; color: var(--primary); text-transform: uppercase; }
 
   .icon-btn {
-    background: var(--input-bg); border: 1px solid var(--border-color);
-    color: var(--text-color); padding: 5px 8px; border-radius: 8px; cursor: pointer; font-size: 14px;
+    background: var(--input-bg); 
+    border: 1px solid var(--border-color);
+    color: var(--text-color); 
+    padding: 6px 10px; 
+    border-radius: 8px; 
+    cursor: pointer; 
+    font-size: calc(13px * var(--font-scale)); 
+    font-family: var(--font-family);
+    box-shadow: 0 2px 4px rgba(0,0,0,0.08);
   }
 
-  .calc-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 6px; }
+  .calc-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 8px; }
   .input-group { display: flex; flex-direction: column; }
-  .input-group label { font-size: 10px; color: var(--subtext); margin-bottom: 2px; font-weight: 600; }
+  .input-group label { font-size: calc(11px * var(--font-scale)); color: var(--subtext); margin-bottom: 3px; font-weight: 600; }
   .input-group input, select, textarea {
-    width: 100%; padding: 6px; border: 1px solid var(--border-color); border-radius: 8px;
-    font-size: 13px; font-weight: 600; outline: none; background: var(--input-bg); color: var(--text-color);
+    width: 100%; padding: 8px; border: 1px solid var(--border-color); border-radius: 8px;
+    font-size: calc(13px * var(--font-scale)); font-weight: 600; outline: none; background: var(--input-bg); color: var(--text-color);
+    font-family: var(--font-family);
+    box-shadow: inset 0 1px 2px rgba(0,0,0,0.06);
   }
 
   .result-box {
     grid-column: span 2; background: var(--input-bg); border-left: 4px solid var(--accent);
-    padding: 6px 8px; border-radius: 0 8px 8px 0; margin-top: 2px;
+    padding: 8px; border-radius: 0 8px 8px 0; margin-top: 4px;
   }
-  .result-time { font-size: 16px; font-weight: 700; color: var(--primary); }
-  .result-note { font-size: 10px; color: var(--subtext); }
+  .result-time { font-size: calc(16px * var(--font-scale)); font-weight: 700; color: var(--primary); }
+  .result-note { font-size: calc(11px * var(--font-scale)); color: var(--subtext); }
 
-  .month-header { display: flex; justify-content: space-between; align-items: center; margin-bottom: 8px; }
+  .month-header { display: flex; justify-content: space-between; align-items: center; margin-bottom: 6px; }
   .nav-btn {
     background: var(--input-bg); border: 1px solid var(--border-color);
-    border-radius: 8px; padding: 4px 10px; font-weight: bold; font-size: 14px; color: var(--primary);
+    border-radius: 8px; padding: 4px 12px; font-weight: bold; 
+    font-size: calc(14px * var(--font-scale)); color: var(--primary); font-family: var(--font-family);
+    cursor: pointer;
   }
-  .month-title { font-size: 16px; font-weight: 700; color: var(--primary); display: flex; gap: 4px; }
+  .month-title { font-size: calc(15px * var(--font-scale)); font-weight: 700; color: var(--primary); display: flex; gap: 4px; align-items: center; }
 
-  .cal-table { width: 100%; border-collapse: collapse; table-layout: fixed; }
-  .cal-table th { font-size: 10px; color: var(--subtext); padding-bottom: 4px; font-weight: 700; text-align: center; }
-  .cal-table td { padding: 1px; height: 54px; vertical-align: top; cursor: pointer; }
+  .cal-table { 
+    width: 100%; 
+    height: 100%; 
+    border-collapse: collapse; 
+    table-layout: fixed; 
+    flex: 1; 
+  }
+  
+  .cal-table th { 
+    font-size: calc(11px * var(--font-scale)); 
+    color: var(--subtext); 
+    padding-bottom: 4px; 
+    font-weight: 700; 
+    text-align: center; 
+    height: 22px; 
+  }
+  
+  .cal-table td { 
+    padding: 1px; 
+    width: 14.28%; 
+    vertical-align: top; 
+    cursor: pointer;
+    border: 1px solid var(--border-color); 
+  }
 
   .day-cell {
-    height: 100%; width: 100%; border-radius: 6px; padding: 2px;
-    display: flex; flex-direction: column; justify-content: flex-start;
-    align-items: stretch; position: relative; overflow: hidden;
-    border: 1px solid transparent;
+    height: 100%; 
+    width: 100%; 
+    border-radius: 4px; 
+    padding: 2px;
+    display: flex; 
+    flex-direction: column; 
+    justify-content: flex-start;
+    align-items: stretch; 
+    position: relative; 
+    overflow: hidden;
+    border: 2px solid transparent; 
+    box-sizing: border-box;
   }
 
-  .day-num { font-size: 13px; font-weight: 600; text-align: center; line-height: 1.1; }
+  .day-num { 
+    font-size: calc(12px * var(--font-scale)); 
+    font-weight: 600; 
+    text-align: center; 
+    line-height: 1.1; 
+  }
   
   .has-text .day-num {
-    font-size: 10px; font-weight: 700; text-align: left; padding-left: 2px;
+    font-size: calc(10px * var(--font-scale)); 
+    font-weight: 700; 
+    text-align: left; 
+    padding-left: 1px;
   }
 
   .day-label {
-    font-size: 9px; line-height: 1.05; padding: 2px; border-radius: 3px;
-    margin-top: 1px; white-space: nowrap; overflow: hidden; text-overflow: ellipsis;
-    background: var(--note-bg); color: var(--note-text); font-weight: 600; text-align: left;
+    font-size: calc(8.5px * var(--font-scale)); 
+    line-height: 1.05; 
+    padding: 2px; 
+    border-radius: 3px;
+    margin-top: 1px; 
+    word-break: break-word; 
+    overflow: hidden;
+    text-overflow: ellipsis;
+    display: -webkit-box;
+    -webkit-line-clamp: 3;
+    -webkit-box-orient: vertical;
+    background: var(--note-bg); 
+    color: var(--note-text); 
+    font-weight: 600; 
+    text-align: left;
   }
 
   .today .day-cell { border: 2px solid var(--today-border) !important; background-color: var(--today-bg); }
-  
-  /* Рамочки ровно по 2 пикселя */
   .holiday .day-cell { border: 2px solid var(--holiday-border); }
   .pre-hol .day-cell { border: 2px solid var(--pre-border); }
   .work-sat .day-cell { border: 2px solid var(--work-border); }
-
+  
+  /* Тонкая дымка на выходные (суббота и воскресенье) */
+  .weekend { background-color: rgba(255, 255, 255, 0.06); }
   .weekend .day-num { color: #e74c3c; }
+
+  .bottom-bar {
+    position: fixed; bottom: 0; left: 0; width: 100%;
+    background: var(--card-bg); border-top: 1px solid var(--border-color);
+    padding: 6px; display: flex; flex-direction: column; gap: 4px; z-index: 50;
+    box-shadow: 0 -6px 16px rgba(0,0,0,0.15);
+  }
+  .bottom-row { display: flex; gap: 4px; justify-content: space-between; }
+  .bottom-btn {
+    flex: 1; background: var(--input-bg); border: 1px solid var(--border-color);
+    color: var(--text-color); padding: 8px 4px; border-radius: 8px;
+    font-size: calc(11px * var(--font-scale)); font-weight: 600; text-align: center; cursor: pointer;
+    white-space: nowrap; overflow: hidden; text-overflow: ellipsis; font-family: var(--font-family);
+  }
+  
+  .bottom-btn.active { 
+    background: var(--accent) !important; 
+    color: var(--accent-text) !important; 
+    border-color: var(--accent) !important; 
+  }
 
   .modal {
     display: none; position: fixed; top: 0; left: 0; width: 100%; height: 100%;
-    background: rgba(0,0,0,0.5); justify-content: center; align-items: center; z-index: 100;
+    background: rgba(0,0,0,0.6); backdrop-filter: blur(2px); justify-content: center; align-items: center; z-index: 100;
   }
   .modal-content {
-    background: var(--card-bg); padding: 16px; border-radius: 14px; width: 85%; max-width: 360px;
-    color: var(--text-color); border: 1px solid var(--border-color);
+    background: var(--card-bg); padding: 16px; border-radius: 16px; width: 85%; max-width: 360px;
+    color: var(--text-color); border: 1px solid var(--border-color); max-height: 85vh; overflow-y: auto;
+    box-shadow: 0 20px 40px rgba(0,0,0,0.4);
   }
 
   .popover {
-    display: none; position: absolute; left: 4%; right: 4%; bottom: 10px;
+    display: none; position: absolute; left: 4%; right: 4%; bottom: 85px;
     background: var(--card-bg); border: 2px solid var(--border-color); border-radius: 14px;
-    padding: 12px; box-shadow: 0 8px 24px rgba(0,0,0,0.3); z-index: 90;
-    animation: popUp 0.2s ease-out;
+    padding: 12px; box-shadow: 0 10px 25px rgba(0,0,0,0.3); z-index: 90;
   }
-
-  @keyframes popUp {
-    from { transform: translateY(10px); opacity: 0; }
-    to { transform: translateY(0); opacity: 1; }
-  }
-
-  .popover-header { display: flex; justify-content: space-between; align-items: center; font-size: 14px; font-weight: 700; margin-bottom: 8px; }
 
   .event-list {
     background: var(--input-bg); border: 1px solid var(--border-color); border-radius: 8px;
-    padding: 8px; margin-bottom: 8px; max-height: 100px; overflow-y: auto;
+    padding: 6px; margin-bottom: 8px; max-height: 90px; overflow-y: auto;
   }
-  .event-item { font-size: 12px; font-weight: 600; padding: 2px 0; border-bottom: 1px dashed var(--border-color); }
-  .event-item:last-child { border-bottom: none; }
-  .event-empty { font-size: 11px; color: var(--subtext); font-style: italic; text-align: center; }
+  .event-empty { font-size: calc(11px * var(--font-scale)); color: var(--subtext); font-style: italic; text-align: center; }
+
+  .btn-primary {
+    width: 100%; 
+    background: var(--accent); 
+    color: var(--accent-text); 
+    font-weight: bold;
+    border: none;
+    padding: 10px;
+    border-radius: 8px;
+    cursor: pointer;
+    font-size: calc(13px * var(--font-scale));
+    font-family: var(--font-family);
+  }
 </style>
 </head>
-<body>
+<body onload="init()">
 
 <div class="container">
 
-  <!-- Калькулятор смены -->
-  <div class="card">
-    <div class="top-header">
-      <h2>⏱ Калькулятор смены</h2>
-      <button class="icon-btn" onclick="openSettings()">⚙️</button>
+  <!-- Вкладка: Календарь -->
+  <div id="viewCalendar" class="view-section active">
+    <div class="card">
+      <div class="month-header">
+        <button class="nav-btn" onclick="changeMonth(-1)">‹</button>
+        <div class="month-title">
+          <span id="monthTitleText"></span>
+          <select id="yearSelect" style="border:none; background:transparent;" onchange="onYearChange()"></select>
+        </div>
+        <button class="nav-btn" onclick="changeMonth(1)">›</button>
+      </div>
+
+      <table class="cal-table">
+        <thead>
+          <tr id="weekdaysHeader"></tr>
+        </thead>
+        <tbody id="calBody"></tbody>
+      </table>
     </div>
-    
-    <div class="calc-grid">
-      <div class="input-group">
-        <label>Начало работы</label>
-        <input type="time" id="startTime" value="08:30" oninput="calculateShift()">
+  </div>
+
+  <!-- Вкладка: Калькулятор -->
+  <div id="viewCalc" class="view-section">
+    <div class="card">
+      <div class="top-header">
+        <h2 id="txtCalcTitle">⏱ Калькулятор смены</h2>
       </div>
-      <div class="input-group">
-        <label>Норма (часов)</label>
-        <input type="number" id="workHours" value="8.5" step="0.5" oninput="calculateShift()">
-      </div>
-      <div class="input-group">
-        <label>Обед / Паузы (мин)</label>
-        <input type="number" id="breakMins" value="30" step="5" oninput="calculateShift()">
-      </div>
-      <div class="input-group">
-        <label>Сокращение (ч)</label>
-        <input type="number" id="shortenHours" value="0" step="0.5" min="0" oninput="calculateShift()">
-      </div>
-      <div class="result-box">
-        <div class="result-time" id="endTime">--:--</div>
-        <div class="result-note" id="calcDetails">Заполните параметры</div>
+      
+      <div class="calc-grid">
+        <div class="input-group">
+          <label id="txtStartWork">Начало работы</label>
+          <input type="time" id="startTime" value="08:30" oninput="calculateShift()">
+        </div>
+        <div class="input-group">
+          <label id="txtNormHours">Норма (часов)</label>
+          <input type="number" id="workHours" value="8.5" step="0.5" oninput="calculateShift()">
+        </div>
+        <div class="input-group">
+          <label id="txtBreakMins">Обед / Паузы (мин)</label>
+          <input type="number" id="breakMins" value="30" step="5" oninput="calculateShift()">
+        </div>
+        <div class="input-group">
+          <label id="txtShorten">Сокращение (ч)</label>
+          <input type="number" id="shortenHours" value="0" step="0.5" min="0" oninput="calculateShift()">
+        </div>
+        <div class="result-box">
+          <div class="result-time" id="endTime">--:--</div>
+          <div class="result-note" id="calcDetails">Заполните параметры</div>
+        </div>
       </div>
     </div>
   </div>
 
-  <!-- Календарь -->
-  <div class="card">
-    <div class="month-header">
-      <button class="nav-btn" onclick="changeMonth(-1)">‹</button>
-      <div class="month-title">
-        <span id="monthTitleText"></span>
-        <select id="yearSelect" style="border:none; background:transparent;" onchange="onYearChange()"></select>
-      </div>
-      <button class="nav-btn" onclick="changeMonth(1)">›</button>
-    </div>
-
-    <table class="cal-table">
-      <thead>
-        <tr><th>ПН</th><th>ВТ</th><th>СР</th><th>ЧТ</th><th>ПТ</th><th>СБ</th><th>ВС</th></tr>
-      </thead>
-      <tbody id="calBody"></tbody>
-    </table>
-  </div>
-
-  <!-- Поп-ап окно -->
+  <!-- Поп-ап заметки на день -->
   <div class="popover" id="dayPopover">
-    <div class="popover-header">
+    <div class="popover-header" style="display:flex; justify-content:space-between; align-items:center; font-weight:700; margin-bottom:8px;">
       <span id="popoverTitle">--.--.----</span>
       <button class="icon-btn" onclick="closePopover()" style="padding:2px 6px;">✕</button>
     </div>
@@ -243,24 +483,96 @@
     </div>
 
     <div class="input-group" style="margin-bottom: 8px;">
-      <label>Добавить / изменить заметку:</label>
-      <textarea id="userNoteInput" rows="2" placeholder="Добавить запись... (каждая с новой строки)"></textarea>
+      <label id="txtNoteLabel">Заметка:</label>
+      <textarea id="userNoteInput" rows="2" placeholder="Добавить запись..."></textarea>
     </div>
     <div style="display:flex; gap:6px;">
-      <button class="icon-btn" style="flex:1; background:var(--accent); color:#fff; font-weight:bold;" onclick="saveNote()">Сохранить</button>
-      <button class="icon-btn" style="background:#e74c3c; color:#fff;" onclick="deleteNote()">Очистить</button>
+      <button class="btn-primary" style="flex:1;" onclick="saveNote()" id="btnSave">Сохранить</button>
+      <button class="icon-btn" style="background:#e74c3c; color:#fff;" onclick="deleteNote()" id="btnClear">Очистить</button>
     </div>
   </div>
 
 </div>
 
-<!-- Настройки темы и страны -->
+<!-- Нижняя панель -->
+<div class="bottom-bar">
+  <div class="bottom-row">
+    <button class="bottom-btn active" id="tabBtnCal" onclick="switchView('calendar')">📅 Календарь</button>
+    <button class="bottom-btn" id="tabBtnCalc" onclick="switchView('calc')">⏱ Калькулятор</button>
+  </div>
+  <div class="bottom-row">
+    <button class="bottom-btn" id="btnTodayBar" onclick="goToToday()">📍 Сегодня</button>
+    <button class="bottom-btn" id="btnPaletteBar" onclick="openPalette()">🎨 Палитра</button>
+    <button class="bottom-btn" id="btnImportBar" onclick="document.getElementById('icsFileInput').click()">📂 ICS</button>
+    <button class="bottom-btn" id="btnSettingsBar" onclick="openSettings()">⚙️ Меню</button>
+  </div>
+</div>
+<input type="file" id="icsFileInput" accept=".ics" style="display:none" onchange="importIcsFile(event)">
+
+<!-- Модальное окно «Палитра стиля» -->
+<div class="modal" id="paletteModal">
+  <div class="modal-content">
+    <h3 style="margin-top:0;" id="txtPaletteTitle">🎨 Палитра стилей</h3>
+
+    <div class="input-group" style="margin-bottom: 10px;">
+      <label id="txtFontLabel">Шрифт 🔤</label>
+      <select id="fontSelect" onchange="changeFont(this.value)">
+        <option value="'Roboto', sans-serif">Roboto (Классический)</option>
+        <option value="'Open Sans', sans-serif">Open Sans (Мягкий)</option>
+        <option value="'Montserrat', sans-serif">Montserrat (Современный)</option>
+        <option value="'Lato', sans-serif">Lato (Элегантный)</option>
+        <option value="'Inter', sans-serif">Inter (Строгий)</option>
+        <option value="'Nunito', sans-serif">Nunito (Округлый)</option>
+        <option value="'Ubuntu', sans-serif">Ubuntu (Корпоративный)</option>
+        <option value="'Comfortaa', cursive">Comfortaa (Арт)</option>
+        <option value="'Playfair Display', serif">Playfair Display (Засечки)</option>
+        <option value="'Merriweather', serif">Merriweather (Книжный)</option>
+      </select>
+    </div>
+
+    <div class="input-group" style="margin-bottom: 10px;">
+      <label id="txtZoomLabel">Масштаб текста: <span id="zoomValue">100%</span></label>
+      <input type="range" id="zoomRange" min="0.8" max="1.3" step="0.05" value="1" oninput="changeZoom(this.value)">
+    </div>
+
+    <div class="input-group" style="margin-bottom: 14px;">
+      <label id="txtThemeLabel">Тема оформления 🎨</label>
+      <select id="themeSelect" onchange="changeTheme(this.value)">
+        <option value="blue-light" id="optThemeBlueLight">Голубая 🩵</option>
+        <option value="blue-dark" id="optThemeBlueDark">Синяя 💙</option>
+        <option value="green" id="optThemeGreen">Холодный изумруд 🌲</option>
+        <option value="gray" id="optThemeGray">Темный графит 🩶</option>
+        <option value="light-gray" id="optThemeLightGray">Дымчато-серый ☁️</option>
+        <option value="pink" id="optThemePink">Нежная роза 🌸</option>
+        <option value="default" id="optThemeDefault">Светлая классика ☀️</option>
+        <option value="dark" id="optThemeDark">Глубокая ночь 🌙</option>
+      </select>
+    </div>
+    
+    <button class="btn-primary" onclick="closeModal('paletteModal')" id="btnClosePalette">Готово</button>
+  </div>
+</div>
+
+<!-- Модальное окно настроек -->
 <div class="modal" id="settingsModal">
   <div class="modal-content">
-    <h3 style="margin-top:0;">⚙️ Настройки</h3>
+    <h3 style="margin-top:0;" id="txtSettingsTitle">⚙️ Меню</h3>
     
-    <div class="input-group" style="margin-bottom: 12px;">
-      <label>Страна праздников 🌍</label>
+    <div class="input-group" style="margin-bottom: 10px;">
+      <label id="txtLangLabel">Язык интерфейса 🌐</label>
+      <select id="langSelect" onchange="changeLanguage(this.value)">
+        <option value="ru">Русский 🇷🇺</option>
+        <option value="lv">Latviešu 🇱🇻</option>
+        <option value="en">English 🇬🇧</option>
+        <option value="de">Deutsch 🇩🇪</option>
+        <option value="et">Eesti 🇪🇪</option>
+        <option value="lt">Lietuvių 🇱🇹</option>
+        <option value="pl">Polski 🇵🇱</option>
+      </select>
+    </div>
+
+    <div class="input-group" style="margin-bottom: 14px;">
+      <label id="txtCountryLabel">Страна праздников 🌍</label>
       <select id="countrySelect" onchange="changeCountry(this.value)">
         <option value="LV">Латвия 🇱🇻</option>
         <option value="DE">Германия 🇩🇪</option>
@@ -270,96 +582,166 @@
         <option value="NONE">Без праздников 🚫</option>
       </select>
     </div>
-
-    <div class="input-group" style="margin-bottom: 12px;">
-      <label>Выберите стиль 🎨</label>
-      <select id="themeSelect" onchange="changeTheme(this.value)">
-        <option value="green">Холодный изумруд 🌲</option>
-        <option value="gray">Темный графит 🩶</option>
-        <option value="light-gray">Дымчато-серый ☁️</option>
-        <option value="pink">Нежная роза 🌸</option>
-        <option value="default">Светлая классика ☀️</option>
-        <option value="dark">Глубокая ночь 🌙</option>
-      </select>
-    </div>
     
-    <button class="icon-btn" style="width:100%; margin-top:6px;" onclick="closeModal('settingsModal')">Закрыть</button>
+    <button class="btn-primary" onclick="closeModal('settingsModal')" id="btnCloseModal">Закрыть</button>
   </div>
 </div>
 
 <script>
-const events2026_LV = {
-  "1-1": { text: "Jaungada diena", type: "holiday" },
-  "1-2": { text: "Pārceltā brīvdiena", type: "holiday" },
-  "1-10": { text: "Atstrāde (Sestdiena)", type: "work-sat" },
-  "2-14": { text: "Svētā Valentīna diena", type: "memo" },
-  "4-2": { text: "Pirmssvētku diena (-1 stunda)", type: "pre" },
-  "4-3": { text: "Lielā Piektdiena", type: "holiday" },
-  "4-5": { text: "Lieldienas", type: "holiday" },
-  "4-6": { text: "Otrās Lieldienas", type: "holiday" },
-  "4-30": { text: "Pirmssvētku diena (-1 stunda)", type: "pre" },
-  "5-1": { text: "Darba svētki", type: "holiday" },
-  "5-4": { text: "LR Neatkarības atjaunošanas diena", type: "holiday" },
-  "6-19": { text: "Pirmssvētku diena (-1 stunda)", type: "pre" },
-  "6-22": { text: "Pārceltā brīvdiena", type: "holiday" },
-  "6-23": { text: "Līgo diena", type: "holiday" },
-  "6-24": { text: "Jāņu diena", type: "holiday" },
-  "6-27": { text: "Atstrāde (Sestdiena)", type: "work-sat" },
-  "11-11": { text: "Lāčplēša diena", type: "memo" },
-  "11-17": { text: "Pirmssvētku diena (-1 stunda)", type: "pre" },
-  "11-18": { text: "LR Proklamēšanas diena", type: "holiday" },
-  "12-23": { text: "Pirmssvētku diena (-1 stunda)", type: "pre" },
-  "12-24": { text: "Ziemassvētku vakars", type: "holiday" },
-  "12-25": { text: "Pirmie Ziemassvētki", type: "holiday" },
-  "12-26": { text: "Otrie Ziemassvētki", type: "holiday" },
-  "12-30": { text: "Pirmssvētku diena (-1 stunda)", type: "pre" },
-  "12-31": { text: "Vecgada diena", type: "holiday" }
+const translations = {
+  ru: {
+    cal: "📅 Календарь", calc: "⏱ Калькулятор", today: "📍 Сегодня", palette: "🎨 Палитра", import: "📂 ICS", settings: "⚙️ Меню",
+    weekdays: ["ПН", "ВТ", "СР", "ЧТ", "ПТ", "СБ", "ВС"],
+    months: ["Январь", "Февраль", "Март", "Апрель", "Май", "Июнь", "Июль", "Август", "Сентябрь", "Октябрь", "Ноябрь", "Декабрь"],
+    calcTitle: "⏱ Калькулятор смены", startWork: "Начало работы", normHours: "Норма (часов)", breakMins: "Обед / Паузы (мин)", shorten: "Сокращение (ч)",
+    paletteTitle: "🎨 Палитра стилей", settingsTitle: "⚙️ Меню", langLabel: "Язык интерфейса 🌐", countryLabel: "Страна праздников 🌍", themeLabel: "Тема оформления 🎨", fontLabel: "Шрифт 🔤", zoomLabel: "Масштаб текста:", close: "Закрыть", done: "Готово",
+    noteLabel: "Заметка:", save: "Сохранить", clear: "Очистить", noEvents: "Записей нет",
+    themeBlueLight: "Голубая 🩵", themeBlueDark: "Синяя 💙"
+  },
+  lv: {
+    cal: "📅 Kalendārs", calc: "⏱ Kalkulators", today: "📍 Šodiena", palette: "🎨 Palete", import: "📂 ICS", settings: "⚙️ Iestat.",
+    weekdays: ["P", "O", "T", "C", "P", "S", "Sv"],
+    months: ["Janvāris", "Februāris", "Marts", "Aprīlis", "Maijs", "Jūnijs", "Jūlijs", "Augusts", "Septembris", "Oktobris", "Novembris", "Decembris"],
+    calcTitle: "⏱ Maiņu kalkulators", startWork: "Darba sākums", normHours: "Norma (stundas)", breakMins: "Pārtraukums (min)", shorten: "Saīsinājums (st)",
+    paletteTitle: "🎨 Stilu palete", settingsTitle: "⚙️ Iestatījumi", langLabel: "Valoda 🌐", countryLabel: "Svētku valsts 🌍", themeLabel: "Tēma 🎨", fontLabel: "Šrifts 🔤", zoomLabel: "Teksta mērogs:", close: "Aizvērt", done: "Gatavs",
+    noteLabel: "Piezīme:", save: "Saglabāt", clear: "Notīrīt", noEvents: "Nav ierakstu",
+    themeBlueLight: "Zila 🩵", themeBlueDark: "Tumši zila 💙"
+  },
+  en: {
+    cal: "📅 Calendar", calc: "⏱ Calculator", today: "📍 Today", palette: "🎨 Palette", import: "📂 ICS", settings: "⚙️ Menu",
+    weekdays: ["MO", "TU", "WE", "TH", "FR", "SA", "SU"],
+    months: ["January", "February", "March", "April", "May", "June", "July", "August", "September", "October", "November", "December"],
+    calcTitle: "⏱ Shift Calculator", startWork: "Start time", normHours: "Work hours", breakMins: "Break (mins)", shorten: "Shortened (hrs)",
+    paletteTitle: "🎨 Style Palette", settingsTitle: "⚙️ Menu", langLabel: "Language 🌐", countryLabel: "Holidays Country 🌍", themeLabel: "Theme 🎨", fontLabel: "Font 🔤", zoomLabel: "Text Scale:", close: "Close", done: "Done",
+    noteLabel: "Note:", save: "Save", clear: "Clear", noEvents: "No entries",
+    themeBlueLight: "Light Blue 🩵", themeBlueDark: "Dark Blue 💙"
+  },
+  de: {
+    cal: "📅 Kalender", calc: "⏱ Rechner", today: "📍 Heute", palette: "🎨 Palette", import: "📂 ICS", settings: "⚙️ Menü",
+    weekdays: ["MO", "DI", "MI", "DO", "FR", "SA", "SO"],
+    months: ["Januar", "Februar", "März", "April", "Mai", "Juni", "Juli", "August", "September", "Oktober", "November", "Dezember"],
+    calcTitle: "⏱ Schichtrechner", startWork: "Arbeitsbeginn", normHours: "Soll-Stunden", breakMins: "Pause (Min)", shorten: "Verkürzung (Std)",
+    paletteTitle: "🎨 Stilpalette", settingsTitle: "⚙️ Menü", langLabel: "Sprache 🌐", countryLabel: "Feiertage Land 🌍", themeLabel: "Design 🎨", fontLabel: "Schriftart 🔤", zoomLabel: "Textskalierung:", close: "Schließen", done: "Fertig",
+    noteLabel: "Notiz:", save: "Speichern", clear: "Löschen", noEvents: "Keine Einträge",
+    themeBlueLight: "Hellblau 🩵", themeBlueDark: "Dunkelblau 💙"
+  },
+  et: {
+    cal: "📅 Kalender", calc: "⏱ Kalkulaator", today: "📍 Täna", palette: "🎨 Palett", import: "📂 ICS", settings: "⚙️ Menüü",
+    weekdays: ["E", "T", "K", "N", "R", "L", "P"],
+    months: ["Jaanuar", "Veebruar", "Märts", "Aprill", "Mai", "Juuni", "Juuli", "August", "September", "Oktoober", "November", "Detsember"],
+    calcTitle: "⏱ Vahetuse kalkulaator", startWork: "Töö algus", normHours: "Normtunnid", breakMins: "Paus (min)", shorten: "Lühendamine (h)",
+    paletteTitle: "🎨 Stiilipalett", settingsTitle: "⚙️ Menüü", langLabel: "Keel 🌐", countryLabel: "Pühade riik 🌍", themeLabel: "Teema 🎨", fontLabel: "Srift 🔤", zoomLabel: "Teksti skaala:", close: "Sulge", done: "Valmis",
+    noteLabel: "Märge:", save: "Salvesta", clear: "Puhasta", noEvents: "Sissekanded puuduvad",
+    themeBlueLight: "Helesinine 🩵", themeBlueDark: "Tumesinine 💙"
+  },
+  lt: {
+    cal: "📅 Kalendorius", calc: "⏱ Skaičiuoklė", today: "📍 Šiandien", palette: "🎨 Paletė", import: "📂 ICS", settings: "⚙️ Meniu",
+    weekdays: ["PR", "AN", "TR", "KT", "PN", "ŠŠ", "SK"],
+    months: ["Sausis", "Vasaris", "Kovas", "Balandis", "Gegužė", "Birželis", "Liepa", "Rugpjūtis", "Rugsėjis", "Spalis", "Lapkritis", "Gruodis"],
+    calcTitle: "⏱ Pamainos skaičiuoklė", startWork: "Darbo pradžia", normHours: "Norma (val.)", breakMins: "Pertrauka (min.)", shorten: "Sutrumpinimas (val.)",
+    paletteTitle: "🎨 Stilių paletė", settingsTitle: "⚙️ Meniu", langLabel: "Kalba 🌐", countryLabel: "Švenčių šalis 🌍", themeLabel: "Tema 🎨", fontLabel: "Šriftas 🔤", zoomLabel: "Teksto dydis:", close: "Uždaryti", done: "Atlikta",
+    noteLabel: "Pastaba:", save: "Išsaugoti", clear: "Išvalyti", noEvents: "Įrašų nėra",
+    themeBlueLight: "Šviesiai mėlyna 🩵", themeBlueDark: "Tamsiai mėlyna 💙"
+  },
+  pl: {
+    cal: "📅 Kalendarz", calc: "⏱ Kalkulator", today: "📍 Dzisiaj", palette: "🎨 Paleta", import: "📂 ICS", settings: "⚙️ Menu",
+    weekdays: ["PN", "WT", "ŚR", "CZ", "PT", "SB", "ND"],
+    months: ["Styczeń", "Luty", "Marzec", "Kwiecień", "Maj", "Czerwiec", "Lipiec", "Sierpień", "Wrzesień", "Październik", "Listopad", "Grudzień"],
+    calcTitle: "⏱ Kalkulator zmiany", startWork: "Początek pracy", normHours: "Norma (godz.)", breakMins: "Przerwa (min)", shorten: "Skrócenie (godz.)",
+    paletteTitle: "🎨 Paleta styli", settingsTitle: "⚙️ Menu", langLabel: "Język 🌐", countryLabel: "Kraj świąt 🌍", themeLabel: "Motyw 🎨", fontLabel: "Czcionka 🔤", zoomLabel: "Skala tekstu:", close: "Zamknij", done: "Gotowe",
+    noteLabel: "Notatka:", save: "Zapisz", clear: "Wyczyść", noEvents: "Brak wpisów",
+    themeBlueLight: "Jasnoniebieski 🩵", themeBlueDark: "Ciemnoniebieski 💙"
+  }
 };
 
-const monthNames = ["Janvāris", "Februāris", "Marts", "Aprīlis", "Maijs", "Jūnijs", "Jūlijs", "Augusts", "Septembris", "Oktobris", "Novembris", "Decembris"];
-
+let currentLang = localStorage.getItem('myCalendarLang') || 'ru';
 let now = new Date();
 let currentYear = now.getFullYear();
 let currentMonth = now.getMonth();
 let activeKey = "";
-let activeShortKey = "";
-
 let selectedCountry = localStorage.getItem('myCalendarCountry') || 'LV';
-let apiHolidays = {};
-
 let myNotes = JSON.parse(localStorage.getItem('myCalendarNotes') || '{}');
 
-async function init() {
+function init() {
   populateYears();
   
-  let savedTheme = localStorage.getItem('myCalendarTheme') || 'green';
+  let savedTheme = localStorage.getItem('myCalendarTheme') || 'blue-light';
   document.getElementById('themeSelect').value = savedTheme;
   changeTheme(savedTheme);
 
+  let savedFont = localStorage.getItem('myCalendarFont') || "'Nunito', sans-serif";
+  document.getElementById('fontSelect').value = savedFont;
+  changeFont(savedFont, false);
+
+  let savedZoom = localStorage.getItem('myCalendarZoom') || '1';
+  document.getElementById('zoomRange').value = savedZoom;
+  changeZoom(savedZoom, false);
+
   document.getElementById('countrySelect').value = selectedCountry;
+  document.getElementById('langSelect').value = currentLang;
   
-  await updateCalendar(true);
+  applyLanguage();
+  updateCalendar();
   calculateShift();
 }
 
-async function fetchHolidays(year) {
-  apiHolidays = {};
-  if (selectedCountry === 'NONE') return;
-  if (selectedCountry === 'LV' && year === 2026) return; // Для 2026 года в Латвии используем точный локальный массив с предпраздничными днями
+function applyLanguage() {
+  let t = translations[currentLang] || translations['ru'];
+  document.getElementById('tabBtnCal').innerText = t.cal;
+  document.getElementById('tabBtnCalc').innerText = t.calc;
+  document.getElementById('btnTodayBar').innerText = t.today;
+  document.getElementById('btnPaletteBar').innerText = t.palette;
+  document.getElementById('btnImportBar').innerText = t.import;
+  document.getElementById('btnSettingsBar').innerText = t.settings;
 
-  try {
-    let res = await fetch(`https://date.nager.at/api/v3/PublicHolidays/${year}/${selectedCountry}`);
-    if (res.ok) {
-      let data = await res.json();
-      data.forEach(item => {
-        let [y, m, d] = item.date.split('-').map(Number);
-        let key = `${m}-${d}`;
-        apiHolidays[key] = { text: item.localName || item.name, type: 'holiday' };
-      });
-    }
-  } catch(e) {
-    console.log("Ошибка загрузки праздников:", e);
-  }
+  document.getElementById('txtCalcTitle').innerText = t.calcTitle;
+  document.getElementById('txtStartWork').innerText = t.startWork;
+  document.getElementById('txtNormHours').innerText = t.normHours;
+  document.getElementById('txtBreakMins').innerText = t.breakMins;
+  document.getElementById('txtShorten').innerText = t.shorten;
+  
+  document.getElementById('txtPaletteTitle').innerText = t.paletteTitle;
+  document.getElementById('txtSettingsTitle').innerText = t.settingsTitle;
+  document.getElementById('txtLangLabel').innerText = t.langLabel;
+  document.getElementById('txtCountryLabel').innerText = t.countryLabel;
+  document.getElementById('txtThemeLabel').innerText = t.themeLabel;
+  document.getElementById('txtFontLabel').innerText = t.fontLabel;
+  document.getElementById('btnCloseModal').innerText = t.close;
+  document.getElementById('btnClosePalette').innerText = t.done;
+
+  document.getElementById('optThemeBlueLight').innerText = t.themeBlueLight;
+  document.getElementById('optThemeBlueDark').innerText = t.themeBlueDark;
+
+  let trH = document.getElementById('weekdaysHeader');
+  trH.innerHTML = '';
+  t.weekdays.forEach(w => {
+    let th = document.createElement('th');
+    th.innerText = w;
+    trH.appendChild(th);
+  });
+}
+
+function changeLanguage(lang) {
+  currentLang = lang;
+  localStorage.setItem('myCalendarLang', lang);
+  applyLanguage();
+  updateCalendar();
+}
+
+function changeTheme(theme) {
+  document.documentElement.setAttribute('data-theme', theme);
+  localStorage.setItem('myCalendarTheme', theme);
+}
+
+function changeFont(fontFamily, save = true) {
+  document.documentElement.style.setProperty('--font-family', fontFamily);
+  if (save) localStorage.setItem('myCalendarFont', fontFamily);
+}
+
+function changeZoom(scaleVal, save = true) {
+  document.documentElement.style.setProperty('--font-scale', scaleVal);
+  document.getElementById('zoomValue').innerText = Math.round(scaleVal * 100) + '%';
+  if (save) localStorage.setItem('myCalendarZoom', scaleVal);
 }
 
 function populateYears() {
@@ -373,134 +755,117 @@ function populateYears() {
   }
 }
 
-async function updateCalendar(forceFetch = false) {
-  let yearToFetch = currentYear;
-  // Подгружаем праздники, если год изменился или это первый запуск
-  if (forceFetch || window.lastFetchedYear !== yearToFetch) {
-    window.lastFetchedYear = yearToFetch;
-    await fetchHolidays(yearToFetch);
-  }
-  renderCalendar(currentYear, currentMonth);
-}
+function updateCalendar() {
+  let t = translations[currentLang] || translations['ru'];
+  document.getElementById('monthTitleText').innerText = t.months[currentMonth];
+  document.getElementById('yearSelect').value = currentYear;
 
-function renderCalendar(year, month) {
-  document.getElementById('monthTitleText').innerText = monthNames[month];
-  document.getElementById('yearSelect').value = year;
+  let calBody = document.getElementById('calBody');
+  calBody.innerHTML = '';
 
-  let firstDay = new Date(year, month, 1).getDay();
-  let daysInMonth = new Date(year, month + 1, 0).getDate();
-  let startOffset = (firstDay === 0 ? 7 : firstDay) - 1;
+  let firstDay = new Date(currentYear, currentMonth, 1).getDay();
+  let startingDay = (firstDay === 0) ? 6 : firstDay - 1; 
+  let monthLength = new Date(currentYear, currentMonth + 1, 0).getDate();
 
-  let tbody = document.getElementById('calBody');
-  tbody.innerHTML = '';
-  
-  let day = 1;
-  for (let r = 0; r < 6; r++) {
-    if (day > daysInMonth) break;
-    let tr = document.createElement('tr');
-
-    for (let d = 0; d < 7; d++) {
-      let td = document.createElement('td');
-      if ((r === 0 && d < startOffset) || day > daysInMonth) {
-        td.innerHTML = '';
+  let date = 1;
+  for (let i = 0; i < 6; i++) {
+    let row = document.createElement('tr');
+    for (let j = 0; j < 7; j++) {
+      let cell = document.createElement('td');
+      if (i === 0 && j < startingDay) {
+        row.appendChild(cell);
+      } else if (date > monthLength) {
+        row.appendChild(cell);
       } else {
-        let currentDayNum = day;
-        let fullKey = `${year}-${month + 1}-${currentDayNum}`;
-        let shortKey = `${month + 1}-${currentDayNum}`;
-        let isToday = (currentDayNum === now.getDate() && month === now.getMonth() && year === now.getFullYear());
+        let fullKey = `${currentYear}-${currentMonth + 1}-${date}`;
+        let cellDiv = document.createElement('div');
+        cellDiv.className = 'day-cell';
         
-        let cls = [];
-        if (isToday) cls.push('today');
-
-        let labels = [];
-        let eventObj = null;
-
-        if (selectedCountry === 'LV' && year === 2026 && events2026_LV[shortKey]) {
-          eventObj = events2026_LV[shortKey];
-        } else if (apiHolidays[shortKey]) {
-          eventObj = apiHolidays[shortKey];
+        if (j === 5 || j === 6) cell.className = 'weekend';
+        if (date === now.getDate() && currentMonth === now.getMonth() && currentYear === now.getFullYear()) {
+          cell.className += ' today';
         }
 
-        if (eventObj) {
-          labels.push(eventObj.text);
-          if (eventObj.type === 'holiday') cls.push('holiday');
-          else if (eventObj.type === 'work-sat') cls.push('work-sat');
-          else if (eventObj.type === 'pre') cls.push('pre-hol');
-        }
+        let numDiv = document.createElement('div');
+        numDiv.className = 'day-num';
+        numDiv.innerText = date;
+        cellDiv.appendChild(numDiv);
 
         if (myNotes[fullKey]) {
-          let userLines = myNotes[fullKey].split('\n').filter(l => l.trim() !== '');
-          labels = labels.concat(userLines);
+          let label = document.createElement('div');
+          label.className = 'day-label';
+          label.innerText = myNotes[fullKey];
+          cellDiv.appendChild(label);
+          cellDiv.classList.add('has-text');
         }
 
-        if (labels.length > 0) cls.push('has-text');
-        if (d >= 5) cls.push('weekend');
-
-        td.className = cls.join(' ');
-        
-        let labelsHtml = labels.slice(0, 2).map(l => `<div class="day-label">${l}</div>`).join('');
-        td.innerHTML = `<div class="day-cell"><span class="day-num">${currentDayNum}</span>${labelsHtml}</div>`;
-        
-        td.onclick = function() {
-          openPopover(fullKey, shortKey, currentDayNum, month + 1, year);
-        };
-
-        day++;
+        cell.onclick = () => openPopover(fullKey, date);
+        cell.appendChild(cellDiv);
+        row.appendChild(cell);
+        date++;
       }
-      tr.appendChild(td);
     }
-    tbody.appendChild(tr);
+    calBody.appendChild(row);
+    if (date > monthLength) break;
   }
 }
 
-function openPopover(key, shortKey, day, month, year) {
-  activeKey = key;
-  activeShortKey = shortKey;
+function changeMonth(delta) {
+  currentMonth += delta;
+  if (currentMonth < 0) { currentMonth = 11; currentYear--; }
+  if (currentMonth > 11) { currentMonth = 0; currentYear++; }
+  updateCalendar();
+}
 
-  document.getElementById('popoverTitle').innerText = `${day} ${monthNames[month-1].toLowerCase()} ${year}`;
-  
-  let listContainer = document.getElementById('eventList');
-  listContainer.innerHTML = '';
+function onYearChange() {
+  currentYear = parseInt(document.getElementById('yearSelect').value);
+  updateCalendar();
+}
 
-  let allEvents = [];
-  let eventObj = null;
+function switchView(view) {
+  document.getElementById('viewCalendar').classList.remove('active');
+  document.getElementById('viewCalc').classList.remove('active');
+  document.getElementById('tabBtnCal').classList.remove('active');
+  document.getElementById('tabBtnCalc').classList.remove('active');
 
-  if (selectedCountry === 'LV' && year === 2026 && events2026_LV[shortKey]) {
-    eventObj = events2026_LV[shortKey];
-  } else if (apiHolidays[shortKey]) {
-    eventObj = apiHolidays[shortKey];
-  }
-
-  if (eventObj) {
-    if (eventObj.type === 'holiday') {
-      allEvents.push(`🎉 <b>Государственный выходной:</b> ${eventObj.text}`);
-    } else if (eventObj.type === 'work-sat') {
-      allEvents.push(`💼 <b>Отработка:</b> ${eventObj.text}`);
-    } else if (eventObj.type === 'pre') {
-      allEvents.push(`⏳ <b>Предпраздничный день:</b> ${eventObj.text}`);
-    } else {
-      allEvents.push(`📌 <b>Памятная дата:</b> ${eventObj.text}`);
-    }
-  }
-
-  if (myNotes[key]) {
-    let lines = myNotes[key].split('\n').filter(l => l.trim() !== '');
-    lines.forEach(line => {
-      allEvents.push(`📌 ${line}`);
-    });
-  }
-
-  if (allEvents.length === 0) {
-    listContainer.innerHTML = '<div class="event-empty">Записей нет</div>';
+  if (view === 'calendar') {
+    document.getElementById('viewCalendar').classList.add('active');
+    document.getElementById('tabBtnCal').classList.add('active');
   } else {
-    allEvents.forEach(item => {
-      let div = document.createElement('div');
-      div.className = 'event-item';
-      div.innerHTML = item;
-      listContainer.appendChild(div);
-    });
+    document.getElementById('viewCalc').classList.add('active');
+    document.getElementById('tabBtnCalc').classList.add('active');
   }
+}
 
+function goToToday() {
+  currentYear = now.getFullYear();
+  currentMonth = now.getMonth();
+  updateCalendar();
+  switchView('calendar');
+}
+
+function calculateShift() {
+  let start = document.getElementById('startTime').value;
+  let workH = parseFloat(document.getElementById('workHours').value) || 0;
+  let breakM = parseFloat(document.getElementById('breakMins').value) || 0;
+  let shorten = parseFloat(document.getElementById('shortenHours').value) || 0;
+
+  if (!start) return;
+  let [h, m] = start.split(':').map(Number);
+  let totalMinutes = h * 60 + m + (workH - shorten) * 60 + breakM;
+
+  let endH = Math.floor(totalMinutes / 60) % 24;
+  let endM = Math.round(totalMinutes % 60);
+
+  let formattedH = String(endH).padStart(2, '0');
+  let formattedM = String(endM).padStart(2, '0');
+
+  document.getElementById('endTime').innerText = `${formattedH}:${formattedM}`;
+}
+
+function openPopover(key, dateNum) {
+  activeKey = key;
+  document.getElementById('popoverTitle').innerText = `${dateNum}.${currentMonth + 1}.${currentYear}`;
   document.getElementById('userNoteInput').value = myNotes[key] || '';
   document.getElementById('dayPopover').style.display = 'block';
 }
@@ -528,58 +893,9 @@ function deleteNote() {
   updateCalendar();
 }
 
+function openPalette() { document.getElementById('paletteModal').style.display = 'flex'; }
 function openSettings() { document.getElementById('settingsModal').style.display = 'flex'; }
 function closeModal(id) { document.getElementById(id).style.display = 'none'; }
-
-function changeTheme(theme) {
-  if (theme === 'default') document.body.removeAttribute('data-theme');
-  else document.body.setAttribute('data-theme', theme);
-  localStorage.setItem('myCalendarTheme', theme);
-}
-
-async function changeCountry(country) {
-  selectedCountry = country;
-  localStorage.setItem('myCalendarCountry', country);
-  window.lastFetchedYear = null; // сбрасываем кеш года
-  await updateCalendar(true);
-}
-
-async function changeMonth(delta) {
-  currentMonth += delta;
-  if (currentMonth > 11) { currentMonth = 0; currentYear++; }
-  if (currentMonth < 0) { currentMonth = 11; currentYear--; }
-  await updateCalendar();
-  closePopover();
-}
-
-async function onYearChange() {
-  currentYear = parseInt(document.getElementById('yearSelect').value);
-  await updateCalendar();
-  closePopover();
-}
-
-function calculateShift() {
-  let startVal = document.getElementById('startTime').value;
-  let hours = parseFloat(document.getElementById('workHours').value) || 0;
-  let breakMins = parseInt(document.getElementById('breakMins').value) || 0;
-  let shorten = parseFloat(document.getElementById('shortenHours').value) || 0;
-
-  if (!startVal) return;
-  let [h, m] = startVal.split(':').map(Number);
-  let netWorkMins = Math.max(0, (hours - shorten) * 60);
-  let totalShiftMins = netWorkMins + breakMins;
-
-  let endTotalMins = (h * 60 + m + totalShiftMins) % 1440;
-  let endH = Math.floor(endTotalMins / 60).toString().padStart(2, '0');
-  let endM = (endTotalMins % 60).toString().padStart(2, '0');
-
-  document.getElementById('endTime').innerText = `Конец в ${endH}:${endM}`;
-  let netH = Math.floor(netWorkMins / 60);
-  let netM = netWorkMins % 60;
-  document.getElementById('calcDetails').innerText = `Чистая работа: ${netH} ч ${netM} мин | Перерыв: ${breakMins} мин`;
-}
-
-init();
 </script>
 </body>
 </html>
