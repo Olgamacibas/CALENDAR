@@ -5,14 +5,6 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
 <title>Мой Календарь</title>
 
-<!-- PWA Manifest и Service Worker -->
-<link rel="manifest" href="manifest.json">
-<script>
-  if ('serviceWorker' in navigator) {
-    navigator.serviceWorker.register('./sw.js');
-  }
-</script>
-
 <meta name="mobile-web-app-capable" content="yes">
 <meta name="apple-mobile-web-app-capable" content="yes">
 <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
@@ -51,169 +43,98 @@
   }
 
   [data-theme="blue-light"] {
-    --bg-color: #8da4c4; 
-    --card-bg: #9bb2d4; 
-    --primary: #111e2e;
-    --text-color: #111e2e; 
-    --subtext: #3d5066; 
-    --border-color: #7890b0; 
-    --input-bg: #b0c4e0;
-    --accent: #4a6585; 
-    --accent-text: #ffffff;
-    --today-bg: #cad8ec; 
-    --today-border: #111e2e;
-    --note-bg: #b0c4e0; 
-    --note-text: #111e2e;
-    --main-shadow: 0 16px 32px rgba(20, 35, 55, 0.25);
+    --bg-color: #8da4c4; --card-bg: #9bb2d4; --primary: #111e2e;
+    --text-color: #111e2e; --subtext: #3d5066; --border-color: #7890b0; 
+    --input-bg: #b0c4e0; --accent: #4a6585; --accent-text: #ffffff;
+    --today-bg: #cad8ec; --today-border: #111e2e; --note-bg: #b0c4e0; 
+    --note-text: #111e2e; --main-shadow: 0 16px 32px rgba(20, 35, 55, 0.25);
     --bg-gradient: radial-gradient(circle at center, #9bb2d4 0%, #687e9c 100%);
   }
 
   [data-theme="blue-dark"] {
-    --bg-color: #08101e; 
-    --card-bg: #0e1b2e; 
-    --primary: #ffffff;
-    --text-color: #e2e8f0; 
-    --subtext: #8294b0; 
-    --border-color: #1e3048; 
-    --input-bg: #15243b;
-    --accent: #1e3d6b; 
-    --accent-text: #ffffff;
-    --today-bg: #1e3048; 
-    --today-border: #8294b0;
-    --note-bg: #15243b; 
-    --note-text: #e2e8f0;
-    --main-shadow: 0 20px 40px rgba(0,0,0,0.8);
+    --bg-color: #08101e; --card-bg: #0e1b2e; --primary: #ffffff;
+    --text-color: #e2e8f0; --subtext: #8294b0; --border-color: #1e3048; 
+    --input-bg: #15243b; --accent: #1e3d6b; --accent-text: #ffffff;
+    --today-bg: #1e3048; --today-border: #8294b0; --note-bg: #15243b; 
+    --note-text: #e2e8f0; --main-shadow: 0 20px 40px rgba(0,0,0,0.8);
     --bg-gradient: radial-gradient(circle at center, #0e1b2e 0%, #03060c 100%);
   }
 
   [data-theme="dark"] {
-    --bg-color: #121212; 
-    --card-bg: #1e1e1e; 
-    --primary: #ecf0f1;
-    --text-color: #e0e0e0; 
-    --subtext: #aaa; 
-    --border-color: #333333; 
-    --input-bg: #2a2a2a;
-    --accent: #37474f; 
-    --accent-text: #ffffff;
-    --today-bg: #2c3e50; 
-    --today-border: #7f8c8d;
-    --note-bg: #2a2a2a; 
-    --note-text: #e0e0e0;
-    --main-shadow: 0 20px 40px rgba(0,0,0,0.8);
+    --bg-color: #121212; --card-bg: #1e1e1e; --primary: #ecf0f1;
+    --text-color: #e0e0e0; --subtext: #aaa; --border-color: #333333; 
+    --input-bg: #2a2a2a; --accent: #37474f; --accent-text: #ffffff;
+    --today-bg: #2c3e50; --today-border: #7f8c8d; --note-bg: #2a2a2a; 
+    --note-text: #e0e0e0; --main-shadow: 0 20px 40px rgba(0,0,0,0.8);
     --bg-gradient: radial-gradient(circle at center, #1e1e1e 0%, #050505 100%);
   }
 
   [data-theme="green"] {
-    --bg-color: #003637; 
-    --card-bg: #006B6C; 
-    --primary: #ffffff;
-    --text-color: #e0f2f1; 
-    --subtext: #80cbc4; 
-    --border-color: #00897b; 
-    --input-bg: #005657;
-    --accent: #004d40; 
-    --accent-text: #ffffff;
-    --today-bg: #00897b; 
-    --today-border: #80cbc4;
-    --note-bg: #004546; 
-    --note-text: #e0f2f1;
-    --main-shadow: 0 18px 36px rgba(0, 20, 20, 0.5);
+    --bg-color: #003637; --card-bg: #006B6C; --primary: #ffffff;
+    --text-color: #e0f2f1; --subtext: #80cbc4; --border-color: #00897b; 
+    --input-bg: #005657; --accent: #004d40; --accent-text: #ffffff;
+    --today-bg: #00897b; --today-border: #80cbc4; --note-bg: #004546; 
+    --note-text: #e0f2f1; --main-shadow: 0 18px 36px rgba(0, 20, 20, 0.5);
     --bg-gradient: radial-gradient(circle at center, #005657 0%, #002223 100%);
   }
 
   [data-theme="gray"] {
-    --bg-color: #2b3238; 
-    --card-bg: #5B6770; 
-    --primary: #ffffff;
-    --text-color: #f8f9fa; 
-    --subtext: #d1d5db; 
-    --border-color: #717d86; 
-    --input-bg: #4a545b;
-    --accent: #3b444b; 
-    --accent-text: #ffffff;
-    --today-bg: #717d86; 
-    --today-border: #ffffff;
-    --note-bg: #4a545b; 
-    --note-text: #ffffff;
-    --main-shadow: 0 18px 36px rgba(0,0,0,0.4);
+    --bg-color: #2b3238; --card-bg: #5B6770; --primary: #ffffff;
+    --text-color: #f8f9fa; --subtext: #d1d5db; --border-color: #717d86; 
+    --input-bg: #4a545b; --accent: #3b444b; --accent-text: #ffffff;
+    --today-bg: #717d86; --today-border: #ffffff; --note-bg: #4a545b; 
+    --note-text: #ffffff; --main-shadow: 0 18px 36px rgba(0,0,0,0.4);
     --bg-gradient: radial-gradient(circle at center, #4a545b 0%, #1a1e22 100%);
   }
 
   [data-theme="light-gray"] {
-    --bg-color: #bcbcbc; 
-    --card-bg: #B2B8BB; 
-    --primary: #1c2326;
-    --text-color: #1a2124; 
-    --subtext: #455054; 
-    --border-color: #92999c; 
-    --input-bg: #c7cbce;
-    --accent: #6c7a80; 
-    --accent-text: #ffffff;
-    --today-bg: #d2d7d9; 
-    --today-border: #1c2326;
-    --note-bg: #c7cbce; 
-    --note-text: #1a2124;
-    --main-shadow: 0 16px 30px rgba(0,0,0,0.25);
+    --bg-color: #bcbcbc; --card-bg: #B2B8BB; --primary: #1c2326;
+    --text-color: #1a2124; --subtext: #455054; --border-color: #92999c; 
+    --input-bg: #c7cbce; --accent: #6c7a80; --accent-text: #ffffff;
+    --today-bg: #d2d7d9; --today-border: #1c2326; --note-bg: #c7cbce; 
+    --note-text: #1a2124; --main-shadow: 0 16px 30px rgba(0,0,0,0.25);
     --bg-gradient: radial-gradient(circle at center, #d2d7d9 0%, #8d9498 100%);
   }
 
   [data-theme="pink"] {
-    --bg-color: #d1c0c6; 
-    --card-bg: #D2C4C9; 
-    --primary: #382c30;
-    --text-color: #2b2024; 
-    --subtext: #59484f; 
-    --border-color: #b5a5ab; 
-    --input-bg: #dfd3d7;
-    --accent: #8c707a; 
-    --accent-text: #ffffff;
-    --today-bg: #e8dee2; 
-    --today-border: #382c30;
-    --note-bg: #dfd3d7; 
-    --note-text: #2b2024;
-    --main-shadow: 0 16px 32px rgba(60, 40, 50, 0.3);
+    --bg-color: #d1c0c6; --card-bg: #D2C4C9; --primary: #382c30;
+    --text-color: #2b2024; --subtext: #59484f; --border-color: #b5a5ab; 
+    --input-bg: #dfd3d7; --accent: #8c707a; --accent-text: #ffffff;
+    --today-bg: #e8dee2; --today-border: #382c30; --note-bg: #dfd3d7; 
+    --note-text: #2b2024; --main-shadow: 0 16px 32px rgba(60, 40, 50, 0.3);
     --bg-gradient: radial-gradient(circle at center, #e8dee2 0%, #a39097 100%);
   }
 
   html, body {
-    height: 100vh;
+    min-height: 100vh;
     margin: 0;
     padding: 0;
-    overflow: hidden;
   }
 
   body {
     font-family: var(--font-family);
     background-color: var(--bg-color);
     background-image: var(--bg-gradient); 
+    background-attachment: fixed;
     color: var(--text-color);
     -webkit-tap-highlight-color: transparent; 
     display: flex; 
     flex-direction: column;
-    justify-content: flex-start;
     align-items: center;
     font-size: calc(14px * var(--font-scale));
   }
 
   .container { 
-    flex: 1; 
     width: 100%; 
     max-width: 640px; 
     margin: 0 auto; 
-    position: relative;
-    display: flex; 
-    flex-direction: column; 
-    justify-content: flex-start;
-    align-items: center;
-    padding: 15px 10px 75px 10px;
-    overflow-y: auto;
+    padding: 12px 8px 90px 8px;
   }
 
   .card {
     background: var(--card-bg); 
     border-radius: 18px; 
-    padding: 16px 14px;
+    padding: 12px 8px;
     box-shadow: var(--main-shadow); 
     width: 100%;
     border: 1px solid rgba(255, 255, 255, 0.08);
@@ -234,7 +155,6 @@
     cursor: pointer; 
     font-size: calc(13px * var(--font-scale)); 
     font-family: var(--font-family);
-    box-shadow: 0 2px 4px rgba(0,0,0,0.08);
   }
 
   .calc-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 8px; width: 100%; }
@@ -244,7 +164,6 @@
     width: 100%; padding: 8px; border: 1px solid var(--border-color); border-radius: 8px;
     font-size: calc(13px * var(--font-scale)); font-weight: 600; outline: none; background: var(--input-bg); color: var(--text-color);
     font-family: var(--font-family);
-    box-shadow: inset 0 1px 2px rgba(0,0,0,0.06);
   }
 
   .result-box {
@@ -254,7 +173,7 @@
   .result-time { font-size: calc(16px * var(--font-scale)); font-weight: 700; color: var(--primary); }
   .result-note { font-size: calc(11px * var(--font-scale)); color: var(--subtext); }
 
-  .month-header { display: flex; justify-content: space-between; align-items: center; margin-bottom: 12px; width: 100%; }
+  .month-header { display: flex; justify-content: space-between; align-items: center; margin-bottom: 10px; width: 100%; }
   .nav-btn {
     background: var(--input-bg); border: 1px solid var(--border-color);
     border-radius: 8px; padding: 6px 14px; font-weight: bold; 
@@ -272,7 +191,7 @@
   .cal-table th { 
     font-size: calc(11px * var(--font-scale)); 
     color: var(--subtext); 
-    padding-bottom: 8px; 
+    padding-bottom: 6px; 
     font-weight: 700; 
     text-align: center; 
   }
@@ -280,14 +199,14 @@
   .cal-table td { 
     padding: 1px; 
     width: 14.28%; 
-    height: 68px;
+    min-height: 60px;
     vertical-align: top; 
     cursor: pointer;
     border: 1px solid var(--border-color); 
   }
 
   .day-cell {
-    height: 100%; 
+    min-height: 58px; 
     width: 100%; 
     border-radius: 4px; 
     padding: 2px;
@@ -296,7 +215,6 @@
     justify-content: flex-start;
     align-items: stretch; 
     position: relative; 
-    overflow: hidden;
     border: 2px solid transparent; 
     box-sizing: border-box;
   }
@@ -305,7 +223,8 @@
     font-size: calc(12px * var(--font-scale)); 
     font-weight: 600; 
     text-align: center; 
-    line-height: 1.1; 
+    line-height: 1; 
+    margin-bottom: 2px;
   }
   
   .has-text .day-num {
@@ -316,16 +235,12 @@
   }
 
   .day-label {
-    font-size: calc(7.5px * var(--font-scale)); 
-    line-height: 1.05; 
-    padding: 1px 2px; 
+    font-size: calc(8px * var(--font-scale)); 
+    line-height: 1.1; 
+    padding: 2px; 
     border-radius: 3px;
     margin-top: 1px; 
-    word-break: break-word; 
-    overflow: hidden;
-    display: -webkit-box;
-    -webkit-line-clamp: 4;
-    -webkit-box-orient: vertical;
+    word-break: break-word;
     background: var(--note-bg); 
     color: var(--note-text); 
     font-weight: 600; 
@@ -353,7 +268,7 @@
   .bottom-row { display: flex; gap: 4px; justify-content: space-between; }
   .bottom-btn {
     flex: 1; background: var(--input-bg); border: 1px solid var(--border-color);
-    color: var(--text-color); padding: 8px 4px; border-radius: 8px;
+    color: var(--text-color); padding: 8px 2px; border-radius: 8px;
     font-size: calc(11px * var(--font-scale)); font-weight: 600; text-align: center; cursor: pointer;
     white-space: nowrap; overflow: hidden; text-overflow: ellipsis; font-family: var(--font-family);
   }
@@ -375,14 +290,14 @@
   }
 
   .popover {
-    display: none; position: absolute; left: 4%; right: 4%; bottom: 85px;
+    display: none; position: fixed; left: 5%; right: 5%; top: 20%;
     background: var(--card-bg); border: 2px solid var(--border-color); border-radius: 14px;
-    padding: 12px; box-shadow: 0 10px 25px rgba(0,0,0,0.3); z-index: 90;
+    padding: 14px; box-shadow: 0 10px 25px rgba(0,0,0,0.4); z-index: 90;
   }
 
   .event-list {
     background: var(--input-bg); border: 1px solid var(--border-color); border-radius: 8px;
-    padding: 8px; margin-bottom: 8px; max-height: 110px; overflow-y: auto;
+    padding: 8px; margin-bottom: 8px; max-height: 120px; overflow-y: auto;
   }
   .event-item {
     font-size: calc(12px * var(--font-scale));
@@ -464,7 +379,7 @@
   </div>
 
   <div class="popover" id="dayPopover">
-    <div class="popover-header" style="display:flex; justify-content:space-between; align-items:center; font-weight:700; margin-bottom:8px;">
+    <div style="display:flex; justify-content:space-between; align-items:center; font-weight:700; margin-bottom:8px;">
       <span id="popoverTitle">--.--.----</span>
       <button class="icon-btn" onclick="closePopover()" style="padding:2px 6px;">✕</button>
     </div>
@@ -521,7 +436,7 @@
 
     <div class="input-group" style="margin-bottom: 10px;">
       <label id="txtZoomLabel">Масштаб текста: <span id="zoomValue">100%</span></label>
-      <input type="range" id="zoomRange" min="0.8" max="1.3" step="0.05" value="1" oninput="changeZoom(this.value)">
+      <input type="range" id="zoomRange" min="0.7" max="1.2" step="0.05" value="1" oninput="changeZoom(this.value)">
     </div>
 
     <div class="input-group" style="margin-bottom: 14px;">
@@ -579,84 +494,29 @@
 const holidaysData = {
   LV: {
     holidays: {
-      "1-1": "Jaunais gads",
-      "4-3": "Lielā piektdiena",
-      "4-5": "1. Lieldienas",
-      "4-6": "2. Lieldienas",
-      "5-1": "Darba svētki",
-      "5-4": "Neatkarība",
-      "6-23": "Līgo",
-      "6-24": "Jāņi",
-      "11-18": "Valsts svētki",
-      "12-24": "Ziemassvētku vakars",
-      "12-25": "1. Ziemassvētki",
-      "12-26": "2. Ziemassvētki",
-      "12-31": "Vecgada diena"
+      "1-1": "Jaunais gads", "4-3": "Lielā piektdiena", "4-5": "1. Lieldienas", "4-6": "2. Lieldienas",
+      "5-1": "Darba svētki", "5-4": "Neatkarība", "6-23": "Līgo", "6-24": "Jāņi",
+      "11-18": "Valsts svētki", "12-24": "Ziemassvētku vakars", "12-25": "1. Ziemassvētki",
+      "12-26": "2. Ziemassvētki", "12-31": "Vecgada diena"
     },
     preHolidays: ["4-2", "4-30", "6-22", "11-17", "12-23", "12-30"],
-    workSaturdays: {
-      "1-17": "Отработка (за 02.01)",
-      "6-27": "Отработка (за 22.06)"
-    }
+    workSaturdays: { "1-17": "Отработка", "6-27": "Отработка" }
   },
   DE: {
-    holidays: {
-      "1-1": "Neujahr",
-      "5-1": "Tag der Arbeit",
-      "10-3": "Tag der Dt. Einheit",
-      "12-25": "1. Weihnachtstag",
-      "12-26": "2. Weihnachtstag"
-    },
-    preHolidays: ["12-24", "12-31"],
-    workSaturdays: {}
+    holidays: { "1-1": "Neujahr", "5-1": "Tag der Arbeit", "10-3": "Tag der Dt. Einheit", "12-25": "1. Weihnachtstag", "12-26": "2. Weihnachtstag" },
+    preHolidays: ["12-24", "12-31"], workSaturdays: {}
   },
   EE: {
-    holidays: {
-      "1-1": "Uusaasta",
-      "2-24": "Iseseisvuspäev",
-      "5-1": "Kevadpüha",
-      "6-23": "Võidupüha",
-      "6-24": "Jaanipäev",
-      "8-20": "Taasiseseisvumispäev",
-      "12-24": "Jõululaupäev",
-      "12-25": "Esimene jõulupüha",
-      "12-26": "Teine jõulupüha"
-    },
-    preHolidays: ["2-23", "6-22", "12-23", "12-31"],
-    workSaturdays: {}
+    holidays: { "1-1": "Uusaasta", "2-24": "Iseseisvuspäev", "5-1": "Kevadpüha", "6-23": "Võidupüha", "6-24": "Jaanipäev", "8-20": "Taasiseseisvumispäev", "12-24": "Jõululaupäev", "12-25": "1. jõulupüha", "12-26": "2. jõulupüha" },
+    preHolidays: ["2-23", "6-22", "12-23", "12-31"], workSaturdays: {}
   },
   LT: {
-    holidays: {
-      "1-1": "Naujieji metai",
-      "2-16": "Valstybės atkūrimo d.",
-      "3-11": "Nepriklausomybė",
-      "5-1": "Darbo diena",
-      "6-24": "Rasos ir Joninės",
-      "7-6": "Mindaugo karūnavimas",
-      "8-15": "Žolinė",
-      "11-1": "Visų šventųjų d.",
-      "11-2": "Vėlinės",
-      "12-24": "Kūčios",
-      "12-25": "1-oji Kalėdų d.",
-      "12-26": "2-oji Kalėdų d."
-    },
-    preHolidays: ["2-15", "3-10", "7-5", "10-31", "12-23"],
-    workSaturdays: {}
+    holidays: { "1-1": "Naujieji metai", "2-16": "Valstybės atkūrimo d.", "3-11": "Nepriklausomybė", "5-1": "Darbo diena", "6-24": "Joninės", "7-6": "Mindaugo karūnavimas", "8-15": "Žolinė", "11-1": "Visų šventųjų d.", "11-2": "Vėlinės", "12-24": "Kūčios", "12-25": "1. Kalėdos", "12-26": "2. Kalėdos" },
+    preHolidays: ["2-15", "3-10", "7-5", "10-31", "12-23"], workSaturdays: {}
   },
   PL: {
-    holidays: {
-      "1-1": "Nowy Rok",
-      "1-6": "Trzech Króli",
-      "5-1": "Święto Pracy",
-      "5-3": "Święto Konstytucji",
-      "8-15": "Wniebowzięcie NMP",
-      "11-1": "Wszystkich Świętych",
-      "11-11": "Święto Niepodległości",
-      "12-25": "Boże Narodzenie",
-      "12-26": "Drugi Dzień"
-    },
-    preHolidays: ["4-30", "5-2", "11-10", "12-24", "12-31"],
-    workSaturdays: {}
+    holidays: { "1-1": "Nowy Rok", "1-6": "Trzech Króli", "5-1": "Święto Pracy", "5-3": "Święto Konstytucji", "8-15": "Wniebowzięcie NMP", "11-1": "Wszystkich Świętych", "11-11": "Święto Niepodległości", "12-25": "Boże Narodzenie", "12-26": "Drugi Dzień" },
+    preHolidays: ["4-30", "5-2", "11-10", "12-24", "12-31"], workSaturdays: {}
   }
 };
 
@@ -678,51 +538,6 @@ const translations = {
     paletteTitle: "🎨 Stilu palete", settingsTitle: "⚙️ Iestatījumi", langLabel: "Valoda 🌐", countryLabel: "Svētku valsts 🌍", themeLabel: "Tēma 🎨", fontLabel: "Šrifts 🔤", zoomLabel: "Teksta mērogs:", close: "Aizvērt", done: "Gatavs",
     noteLabel: "Piezīme:", save: "Saglabāt", clear: "Notīrīt", noEvents: "Nav ierakstu", preHolText: "-1st", preHolFull: "Saīsinātā pirmssvētku diena (-1st)",
     themeBlueLight: "Zila 🩵", themeBlueDark: "Tumši zila 💙"
-  },
-  en: {
-    cal: "📅 Calendar", calc: "⏱ Calculator", today: "📍 Today", palette: "🎨 Palette", import: "📂 ICS", settings: "⚙️ Menu",
-    weekdays: ["MO", "TU", "WE", "TH", "FR", "SA", "SU"],
-    months: ["January", "February", "March", "April", "May", "June", "July", "August", "September", "October", "November", "December"],
-    calcTitle: "⏱ Shift Calculator", startWork: "Start time", normHours: "Work hours", breakMins: "Break (mins)", shorten: "Shortened (hrs)",
-    paletteTitle: "🎨 Style Palette", settingsTitle: "⚙️ Menu", langLabel: "Language 🌐", countryLabel: "Holidays Country 🌍", themeLabel: "Theme 🎨", fontLabel: "Font 🔤", zoomLabel: "Text Scale:", close: "Close", done: "Done",
-    noteLabel: "Note:", save: "Save", clear: "Clear", noEvents: "No entries", preHolText: "-1h", preHolFull: "Shortened pre-holiday day (-1h)",
-    themeBlueLight: "Light Blue 🩵", themeBlueDark: "Dark Blue 💙"
-  },
-  de: {
-    cal: "📅 Kalender", calc: "⏱ Rechner", today: "📍 Heute", palette: "🎨 Palette", import: "📂 ICS", settings: "⚙️ Menü",
-    weekdays: ["MO", "DI", "MI", "DO", "FR", "SA", "SO"],
-    months: ["Januar", "Februar", "März", "April", "Mai", "Juni", "Juli", "August", "September", "Oktober", "November", "Dezember"],
-    calcTitle: "⏱ Schichtrechner", startWork: "Arbeitsbeginn", normHours: "Soll-Stunden", breakMins: "Pause (Min)", shorten: "Verkürzung (Std)",
-    paletteTitle: "🎨 Stilpalette", settingsTitle: "⚙️ Menü", langLabel: "Sprache 🌐", countryLabel: "Feiertage Land 🌍", themeLabel: "Design 🎨", fontLabel: "Schriftart 🔤", zoomLabel: "Textskalierung:", close: "Schließen", done: "Fertig",
-    noteLabel: "Notiz:", save: "Speichern", clear: "Löschen", noEvents: "Keine Einträge", preHolText: "-1Std", preHolFull: "Verkürzter Vorfeiertag (-1Std)",
-    themeBlueLight: "Hellblau 🩵", themeBlueDark: "Dunkelblau 💙"
-  },
-  et: {
-    cal: "📅 Kalender", calc: "⏱ Kalkulaator", today: "📍 Täna", palette: "🎨 Palett", import: "📂 ICS", settings: "⚙️ Menüü",
-    weekdays: ["E", "T", "K", "N", "R", "L", "P"],
-    months: ["Jaanuar", "Veebruar", "Märts", "Aprill", "Mai", "Juuni", "Juuli", "August", "September", "Oktoober", "November", "Detsember"],
-    calcTitle: "⏱ Vahetuse kalkulaator", startWork: "Töö algus", normHours: "Normtunnid", breakMins: "Paus (min)", shorten: "Lühendamine (h)",
-    paletteTitle: "🎨 Stiilipalett", settingsTitle: "⚙️ Menüü", langLabel: "Keel 🌐", countryLabel: "Pühade riik 🌍", themeLabel: "Teema 🎨", fontLabel: "Šrift 🔤", zoomLabel: "Teksti skaala:", close: "Sulge", done: "Valmis",
-    noteLabel: "Märge:", save: "Salvesta", clear: "Puhasta", noEvents: "Sissekanded puuduvad", preHolText: "-1h", preHolFull: "Lühendatud pühadeeelne päev (-1h)",
-    themeBlueLight: "Helesinine 🩵", themeBlueDark: "Tumesinine 💙"
-  },
-  lt: {
-    cal: "📅 Kalendorius", calc: "⏱ Skaičiuoklė", today: "📍 Šiandien", palette: "🎨 Paletė", import: "📂 ICS", settings: "⚙️ Meniu",
-    weekdays: ["PR", "AN", "TR", "KT", "PN", "ŠŠ", "SK"],
-    months: ["Sausis", "Vasaris", "Kovas", "Balandis", "Gegužė", "Birželis", "Liepa", "Rugpjūtis", "Rugsėjis", "Spalis", "Lapkritis", "Gruodis"],
-    calcTitle: "⏱ Pamainos skaičiuoklė", startWork: "Darbo pradžia", normHours: "Norma (val.)", breakMins: "Pertrauka (min.)", shorten: "Sutrumpinimas (val.)",
-    paletteTitle: "🎨 Stilių paletė", settingsTitle: "⚙️ Meniu", langLabel: "Kalba 🌐", countryLabel: "Švenčių šalis 🌍", themeLabel: "Tema 🎨", fontLabel: "Šriftas 🔤", zoomLabel: "Teksto dydis:", close: "Uždaryti", done: "Atlikta",
-    noteLabel: "Pastaba:", save: "Išsaugoti", clear: "Išvalyti", noEvents: "Įrašų nėra", preHolText: "-1val", preHolFull: "Sutrumpinta prieššventinė diena (-1val)",
-    themeBlueLight: "Šviesiai mėlyna 🩵", themeBlueDark: "Tamsiai mėlyna 💙"
-  },
-  pl: {
-    cal: "📅 Kalendarz", calc: "⏱ Kalkulator", today: "📍 Dzisiaj", palette: "🎨 Paleta", import: "📂 ICS", settings: "⚙️ Menu",
-    weekdays: ["PN", "WT", "ŚR", "CZ", "PT", "SB", "ND"],
-    months: ["Styczeń", "Luty", "Marzec", "Kwiecień", "Maj", "Czerwiec", "Lipiec", "Sierpień", "Wrzesień", "Październik", "Listopad", "Grudzień"],
-    calcTitle: "⏱ Kalkulator zmiany", startWork: "Początek pracy", normHours: "Norma (godz.)", breakMins: "Przerwa (min)", shorten: "Skrócenie (godz.)",
-    paletteTitle: "🎨 Paleta styli", settingsTitle: "⚙️ Menu", langLabel: "Język 🌐", countryLabel: "Kraj świąt 🌍", themeLabel: "Motyw 🎨", fontLabel: "Czcionka 🔤", zoomLabel: "Skala tekstu:", close: "Zamknij", done: "Gotowe",
-    noteLabel: "Notatka:", save: "Zapisz", clear: "Wyczyść", noEvents: "Brak wpisów", preHolText: "-1g", preHolFull: "Skrócony dzień przedświąteczny (-1g)",
-    themeBlueLight: "Jasnoniebieski 🩵", themeBlueDark: "Ciemnoniebieski 💙"
   }
 };
 
