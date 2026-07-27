@@ -105,11 +105,7 @@
     --bg-gradient: radial-gradient(circle at center, #e8dee2 0%, #a39097 100%);
   }
 
-  html, body {
-    min-height: 100vh;
-    margin: 0;
-    padding: 0;
-  }
+  html, body { min-height: 100vh; margin: 0; padding: 0; }
 
   body {
     font-family: var(--font-family);
@@ -118,26 +114,14 @@
     background-attachment: fixed;
     color: var(--text-color);
     -webkit-tap-highlight-color: transparent; 
-    display: flex; 
-    flex-direction: column;
-    align-items: center;
+    display: flex; flex-direction: column; align-items: center;
     font-size: calc(14px * var(--font-scale));
   }
 
-  .container { 
-    width: 100%; 
-    max-width: 640px; 
-    margin: 0 auto; 
-    padding: 12px 8px 90px 8px;
-  }
-
+  .container { width: 100%; max-width: 640px; margin: 0 auto; padding: 12px 8px 90px 8px; }
   .card {
-    background: var(--card-bg); 
-    border-radius: 18px; 
-    padding: 12px 8px;
-    box-shadow: var(--main-shadow); 
-    width: 100%;
-    border: 1px solid rgba(255, 255, 255, 0.08);
+    background: var(--card-bg); border-radius: 18px; padding: 12px 8px;
+    box-shadow: var(--main-shadow); width: 100%; border: 1px solid rgba(255, 255, 255, 0.08);
   }
 
   .view-section { display: none; flex-direction: column; width: 100%; align-items: center; }
@@ -147,14 +131,9 @@
   h2 { margin: 0; font-size: calc(14px * var(--font-scale)); font-weight: 700; color: var(--primary); text-transform: uppercase; }
 
   .icon-btn {
-    background: var(--input-bg); 
-    border: 1px solid var(--border-color);
-    color: var(--text-color); 
-    padding: 6px 10px; 
-    border-radius: 8px; 
-    cursor: pointer; 
-    font-size: calc(13px * var(--font-scale)); 
-    font-family: var(--font-family);
+    background: var(--input-bg); border: 1px solid var(--border-color); color: var(--text-color); 
+    padding: 6px 10px; border-radius: 8px; cursor: pointer; 
+    font-size: calc(13px * var(--font-scale)); font-family: var(--font-family);
   }
 
   .calc-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 8px; width: 100%; }
@@ -177,74 +156,27 @@
   .nav-btn {
     background: var(--input-bg); border: 1px solid var(--border-color);
     border-radius: 8px; padding: 6px 14px; font-weight: bold; 
-    font-size: calc(15px * var(--font-scale)); color: var(--primary); font-family: var(--font-family);
-    cursor: pointer;
+    font-size: calc(15px * var(--font-scale)); color: var(--primary); font-family: var(--font-family); cursor: pointer;
   }
   .month-title { font-size: calc(16px * var(--font-scale)); font-weight: 700; color: var(--primary); display: flex; gap: 6px; align-items: center; }
 
-  .cal-table { 
-    width: 100%; 
-    border-collapse: collapse; 
-    table-layout: fixed; 
-  }
-  
-  .cal-table th { 
-    font-size: calc(11px * var(--font-scale)); 
-    color: var(--subtext); 
-    padding-bottom: 6px; 
-    font-weight: 700; 
-    text-align: center; 
-  }
-  
-  .cal-table td { 
-    padding: 1px; 
-    width: 14.28%; 
-    min-height: 60px;
-    vertical-align: top; 
-    cursor: pointer;
-    border: 1px solid var(--border-color); 
-  }
+  .cal-table { width: 100%; border-collapse: collapse; table-layout: fixed; }
+  .cal-table th { font-size: calc(11px * var(--font-scale)); color: var(--subtext); padding-bottom: 6px; font-weight: 700; text-align: center; }
+  .cal-table td { padding: 1px; width: 14.28%; min-height: 60px; vertical-align: top; cursor: pointer; border: 1px solid var(--border-color); }
 
   .day-cell {
-    min-height: 58px; 
-    width: 100%; 
-    border-radius: 4px; 
-    padding: 2px;
-    display: flex; 
-    flex-direction: column; 
-    justify-content: flex-start;
-    align-items: stretch; 
-    position: relative; 
-    border: 2px solid transparent; 
-    box-sizing: border-box;
+    min-height: 58px; width: 100%; border-radius: 4px; padding: 2px;
+    display: flex; flex-direction: column; justify-content: flex-start; align-items: stretch; 
+    position: relative; border: 2px solid transparent; box-sizing: border-box;
   }
 
-  .day-num { 
-    font-size: calc(12px * var(--font-scale)); 
-    font-weight: 600; 
-    text-align: center; 
-    line-height: 1; 
-    margin-bottom: 2px;
-  }
-  
-  .has-text .day-num {
-    font-size: calc(10px * var(--font-scale)); 
-    font-weight: 700; 
-    text-align: left; 
-    padding-left: 1px;
-  }
+  .day-num { font-size: calc(12px * var(--font-scale)); font-weight: 600; text-align: center; line-height: 1; margin-bottom: 2px; }
+  .has-text .day-num { font-size: calc(10px * var(--font-scale)); font-weight: 700; text-align: left; padding-left: 1px; }
 
   .day-label {
-    font-size: calc(8px * var(--font-scale)); 
-    line-height: 1.1; 
-    padding: 2px; 
-    border-radius: 3px;
-    margin-top: 1px; 
-    word-break: break-word;
-    background: var(--note-bg); 
-    color: var(--note-text); 
-    font-weight: 600; 
-    text-align: left;
+    font-size: calc(8px * var(--font-scale)); line-height: 1.1; padding: 2px; border-radius: 3px;
+    margin-top: 1px; word-break: break-word; background: var(--note-bg); color: var(--note-text); 
+    font-weight: 600; text-align: left;
   }
 
   .holiday-label { background: var(--holiday-border); color: #ffffff; }
@@ -273,11 +205,7 @@
     white-space: nowrap; overflow: hidden; text-overflow: ellipsis; font-family: var(--font-family);
   }
   
-  .bottom-btn.active { 
-    background: var(--accent) !important; 
-    color: var(--accent-text) !important; 
-    border-color: var(--accent) !important; 
-  }
+  .bottom-btn.active { background: var(--accent) !important; color: var(--accent-text) !important; border-color: var(--accent) !important; }
 
   .modal {
     display: none; position: fixed; top: 0; left: 0; width: 100%; height: 100%;
@@ -299,27 +227,14 @@
     background: var(--input-bg); border: 1px solid var(--border-color); border-radius: 8px;
     padding: 8px; margin-bottom: 8px; max-height: 120px; overflow-y: auto;
   }
-  .event-item {
-    font-size: calc(12px * var(--font-scale));
-    font-weight: 600;
-    padding: 4px 6px;
-    border-radius: 4px;
-    margin-bottom: 4px;
-  }
+  .event-item { font-size: calc(12px * var(--font-scale)); font-weight: 600; padding: 4px 6px; border-radius: 4px; margin-bottom: 4px; }
   .event-item:last-child { margin-bottom: 0; }
   .event-empty { font-size: calc(11px * var(--font-scale)); color: var(--subtext); font-style: italic; text-align: center; }
 
   .btn-primary {
-    width: 100%; 
-    background: var(--accent); 
-    color: var(--accent-text); 
-    font-weight: bold;
-    border: none;
-    padding: 10px;
-    border-radius: 8px;
-    cursor: pointer;
-    font-size: calc(13px * var(--font-scale));
-    font-family: var(--font-family);
+    width: 100%; background: var(--accent); color: var(--accent-text); font-weight: bold;
+    border: none; padding: 10px; border-radius: 8px; cursor: pointer;
+    font-size: calc(13px * var(--font-scale)); font-family: var(--font-family);
   }
 </style>
 </head>
@@ -372,7 +287,7 @@
         </div>
         <div class="result-box">
           <div class="result-time" id="endTime">--:--</div>
-          <div class="result-note" id="calcDetails">Заполните параметры</div>
+          <div class="result-note" id="calcDetails"></div>
         </div>
       </div>
     </div>
@@ -390,7 +305,7 @@
 
     <div class="input-group" style="margin-bottom: 8px;">
       <label id="txtNoteLabel">Заметка:</label>
-      <textarea id="userNoteInput" rows="2" placeholder="Добавить запись..."></textarea>
+      <textarea id="userNoteInput" rows="2" placeholder="..."></textarea>
     </div>
     <div style="display:flex; gap:6px;">
       <button class="btn-primary" style="flex:1;" onclick="saveNote()" id="btnSave">Сохранить</button>
@@ -477,12 +392,12 @@
     <div class="input-group" style="margin-bottom: 14px;">
       <label id="txtCountryLabel">Страна праздников 🌍</label>
       <select id="countrySelect" onchange="changeCountry(this.value)">
-        <option value="LV">Латвия 🇱🇻</option>
-        <option value="DE">Германия 🇩🇪</option>
-        <option value="EE">Эстония 🇪🇪</option>
-        <option value="LT">Литва 🇱🇹</option>
-        <option value="PL">Польша 🇵🇱</option>
-        <option value="NONE">Без праздников 🚫</option>
+        <option value="LV" id="optCtyLV">Латвия 🇱🇻</option>
+        <option value="DE" id="optCtyDE">Германия 🇩🇪</option>
+        <option value="EE" id="optCtyEE">Эстония 🇪🇪</option>
+        <option value="LT" id="optCtyLT">Литва 🇱🇹</option>
+        <option value="PL" id="optCtyPL">Польша 🇵🇱</option>
+        <option value="NONE" id="optCtyNONE">Без праздников 🚫</option>
       </select>
     </div>
     
@@ -525,19 +440,71 @@ const translations = {
     cal: "📅 Календарь", calc: "⏱ Калькулятор", today: "📍 Сегодня", palette: "🎨 Палитра", import: "📂 ICS", settings: "⚙️ Меню",
     weekdays: ["ПН", "ВТ", "СР", "ЧТ", "ПТ", "СБ", "ВС"],
     months: ["Январь", "Февраль", "Март", "Апрель", "Май", "Июнь", "Июль", "Август", "Сентябрь", "Октябрь", "Ноябрь", "Декабрь"],
-    calcTitle: "⏱ Калькулятор смены", startWork: "Начало работы", normHours: "Норма (часов)", breakMins: "Обед / Паузы (мин)", shorten: "Сокращение (ч)",
+    calcTitle: "⏱ Калькулятор смены", startWork: "Начало работы", normHours: "Норма (часов)", breakMins: "Обед / Паузы (мин)", shorten: "Сокращение (ч)", calcDetails: "Заполните параметры",
     paletteTitle: "🎨 Палитра стилей", settingsTitle: "⚙️ Меню", langLabel: "Язык интерфейса 🌐", countryLabel: "Страна праздников 🌍", themeLabel: "Тема оформления 🎨", fontLabel: "Шрифт 🔤", zoomLabel: "Масштаб текста:", close: "Закрыть", done: "Готово",
-    noteLabel: "Заметка:", save: "Сохранить", clear: "Очистить", noEvents: "Записей нет", preHolText: "-1ч", preHolFull: "Сокращенный предпраздничный день (-1ч)",
-    themeBlueLight: "Голубая 🩵", themeBlueDark: "Синяя 💙"
+    noteLabel: "Заметка:", save: "Сохранить", clear: "Очистить", noEvents: "Записей нет", preHolText: "-1ч", preHolFull: "Сокращенный день (-1ч)",
+    ctyLV: "Латвия 🇱🇻", ctyDE: "Германия 🇩🇪", ctyEE: "Эстония 🇪🇪", ctyLT: "Литва 🇱🇹", ctyPL: "Польша 🇵🇱", ctyNONE: "Без праздников 🚫",
+    themeBlueLight: "Голубая 🩵", themeBlueDark: "Синяя 💙", themeGreen: "Холодный изумруд 🌲", themeGray: "Темный графит 🩶", themeLightGray: "Дымчато-серый ☁️", themePink: "Нежная роза 🌸", themeDefault: "Светлая классика ☀️", themeDark: "Глубокая ночь 🌙"
   },
   lv: {
-    cal: "📅 Kalendārs", calc: "⏱ Kalkulators", today: "📍 Šodiena", palette: "🎨 Palete", import: "📂 ICS", settings: "⚙️ Iestat.",
+    cal: "📅 Kalendārs", calc: "⏱ Kalkulators", today: "📍 Šodiena", palette: "🎨 Palete", import: "📂 ICS", settings: "⚙️ Izvēlne",
     weekdays: ["P", "O", "T", "C", "P", "S", "Sv"],
     months: ["Janvāris", "Februāris", "Marts", "Aprīlis", "Maijs", "Jūnijs", "Jūlijs", "Augusts", "Septembris", "Oktobris", "Novembris", "Decembris"],
-    calcTitle: "⏱ Maiņu kalkulators", startWork: "Darba sākums", normHours: "Norma (stundas)", breakMins: "Pārtraukums (min)", shorten: "Saīsinājums (st)",
-    paletteTitle: "🎨 Stilu palete", settingsTitle: "⚙️ Iestatījumi", langLabel: "Valoda 🌐", countryLabel: "Svētku valsts 🌍", themeLabel: "Tēma 🎨", fontLabel: "Šrifts 🔤", zoomLabel: "Teksta mērogs:", close: "Aizvērt", done: "Gatavs",
-    noteLabel: "Piezīme:", save: "Saglabāt", clear: "Notīrīt", noEvents: "Nav ierakstu", preHolText: "-1st", preHolFull: "Saīsinātā pirmssvētku diena (-1st)",
-    themeBlueLight: "Zila 🩵", themeBlueDark: "Tumši zila 💙"
+    calcTitle: "⏱ Maiņu kalkulators", startWork: "Darba sākums", normHours: "Norma (stundas)", breakMins: "Pārtraukums (min)", shorten: "Saīsinājums (st)", calcDetails: "Aizpildiet parametrus",
+    paletteTitle: "🎨 Stilu palete", settingsTitle: "⚙️ Izvēlne", langLabel: "Saskarnes valoda 🌐", countryLabel: "Svētku valsts 🌍", themeLabel: "Tēma 🎨", fontLabel: "Šrifts 🔤", zoomLabel: "Teksta mērogs:", close: "Aizvērt", done: "Gatavs",
+    noteLabel: "Piezīme:", save: "Saglabāt", clear: "Notīrīt", noEvents: "Nav ierakstu", preHolText: "-1st", preHolFull: "Saīsinātā diena (-1st)",
+    ctyLV: "Latvija 🇱🇻", ctyDE: "Vācija 🇩🇪", ctyEE: "Igaunija 🇪🇪", ctyLT: "Lietuva 🇱🇹", ctyPL: "Polija 🇵🇱", ctyNONE: "Bez svētkiem 🚫",
+    themeBlueLight: "Gaiši zila 🩵", themeBlueDark: "Tumši zila 💙", themeGreen: "Aukstais smaragds 🌲", themeGray: "Tumšais grafīts 🩶", themeLightGray: "Dūmakaini pelēks ☁️", themePink: "Maigā roze 🌸", themeDefault: "Gaišā klasika ☀️", themeDark: "Dziļā nakts 🌙"
+  },
+  en: {
+    cal: "📅 Calendar", calc: "⏱ Calculator", today: "📍 Today", palette: "🎨 Palette", import: "📂 ICS", settings: "⚙️ Menu",
+    weekdays: ["MO", "TU", "WE", "TH", "FR", "SA", "SU"],
+    months: ["January", "February", "March", "April", "May", "June", "July", "August", "September", "October", "November", "December"],
+    calcTitle: "⏱ Shift Calculator", startWork: "Start time", normHours: "Shift hours", breakMins: "Break (min)", shorten: "Shortened (h)", calcDetails: "Fill in parameters",
+    paletteTitle: "🎨 Style Palette", settingsTitle: "⚙️ Menu", langLabel: "Language 🌐", countryLabel: "Holidays Country 🌍", themeLabel: "Theme 🎨", fontLabel: "Font 🔤", zoomLabel: "Text Scale:", close: "Close", done: "Done",
+    noteLabel: "Note:", save: "Save", clear: "Clear", noEvents: "No entries", preHolText: "-1h", preHolFull: "Shortened day (-1h)",
+    ctyLV: "Latvia 🇱🇻", ctyDE: "Germany 🇩🇪", ctyEE: "Estonia 🇪🇪", ctyLT: "Lithuania 🇱🇹", ctyPL: "Poland 🇵🇱", ctyNONE: "No holidays 🚫",
+    themeBlueLight: "Light Blue 🩵", themeBlueDark: "Dark Blue 💙", themeGreen: "Cold Emerald 🌲", themeGray: "Dark Graphite 🩶", themeLightGray: "Smoky Gray ☁️", themePink: "Soft Rose 🌸", themeDefault: "Light Classic ☀️", themeDark: "Deep Night 🌙"
+  },
+  de: {
+    cal: "📅 Kalender", calc: "⏱ Rechner", today: "📍 Heute", palette: "🎨 Palette", import: "📂 ICS", settings: "⚙️ Menü",
+    weekdays: ["MO", "DI", "MI", "DO", "FR", "SA", "SO"],
+    months: ["Januar", "Februar", "März", "April", "Mai", "Juni", "Juli", "August", "September", "Oktober", "November", "Dezember"],
+    calcTitle: "⏱ Schichtrechner", startWork: "Arbeitsbeginn", normHours: "Sollzeit (Std)", breakMins: "Pause (Min)", shorten: "Verkürzung (Std)", calcDetails: "Parameter ausfüllen",
+    paletteTitle: "🎨 Stil-Palette", settingsTitle: "⚙️ Menü", langLabel: "Sprache 🌐", countryLabel: "Feiertage Land 🌍", themeLabel: "Thema 🎨", fontLabel: "Schriftart 🔤", zoomLabel: "Textskalierung:", close: "Schließen", done: "Fertig",
+    noteLabel: "Notiz:", save: "Speichern", clear: "Löschen", noEvents: "Keine Einträge", preHolText: "-1St", preHolFull: "Verkürzter Tag (-1St)",
+    ctyLV: "Lettland 🇱🇻", ctyDE: "Deutschland 🇩🇪", ctyEE: "Estland 🇪🇪", ctyLT: "Litauen 🇱🇹", ctyPL: "Polen 🇵🇱", ctyNONE: "Keine Feiertage 🚫",
+    themeBlueLight: "Hellblau 🩵", themeBlueDark: "Dunkelblau 💙", themeGreen: "Kühler Smaragd 🌲", themeGray: "Dunkelgraphit 🩶", themeLightGray: "Rauchgrau ☁️", themePink: "Zarte Rose 🌸", themeDefault: "Helle Klassik ☀️", themeDark: "Tiefe Nacht 🌙"
+  },
+  et: {
+    cal: "📅 Kalender", calc: "⏱ Kalkulaator", today: "📍 Täna", palette: "🎨 Palett", import: "📂 ICS", settings: "⚙️ Menüü",
+    weekdays: ["E", "T", "K", "N", "R", "L", "P"],
+    months: ["Jaanuar", "Veebruar", "Märts", "Aprill", "Mai", "Juuni", "Juuli", "August", "September", "Oktoober", "November", "Detsember"],
+    calcTitle: "⏱ Vahetuse kalkulaator", startWork: "Töö algus", normHours: "Norm (tundi)", breakMins: "Lõuna (min)", shorten: "Lühendamine (h)", calcDetails: "Täitke parameetrid",
+    paletteTitle: "🎨 Stiilipalett", settingsTitle: "⚙️ Menüü", langLabel: "Keel 🌐", countryLabel: "Pühade riik 🌍", themeLabel: "Teema 🎨", fontLabel: "Font 🔤", zoomLabel: "Teksti mastaap:", close: "Sulge", done: "Valmis",
+    noteLabel: "Märge:", save: "Salvesta", clear: "Puhasta", noEvents: "Kirjeid pole", preHolText: "-1t", preHolFull: "Lühendatud päev (-1t)",
+    ctyLV: "Läti 🇱🇻", ctyDE: "Saksamaa 🇩🇪", ctyEE: "Eesti 🇪🇪", ctyLT: "Leedu 🇱🇹", ctyPL: "Poola 🇵🇱", ctyNONE: "Pühasid pole 🚫",
+    themeBlueLight: "Helebesinine 🩵", themeBlueDark: "Tumesinine 💙", themeGreen: "Külm smaragd 🌲", themeGray: "Tume grafiit 🩶", themeLightGray: "Suitsuhall ☁️", themePink: "Õrn roos 🌸", themeDefault: "Hele klassika ☀️", themeDark: "Sügav öö 🌙"
+  },
+  lt: {
+    cal: "📅 Kalendorius", calc: "⏱ Skaičiuoklė", today: "📍 Šiandien", palette: "🎨 Paletė", import: "📂 ICS", settings: "⚙️ Meniu",
+    weekdays: ["P", "A", "T", "K", "P", "Š", "S"],
+    months: ["Sausis", "Vasaris", "Kovas", "Balandis", "Gegužė", "Birželis", "Liepa", "Rugpjūtis", "Rugsėjis", "Spalis", "Lapkritis", "Gruodis"],
+    calcTitle: "⏱ Pamainos skaičiuoklė", startWork: "Darbo pradžia", normHours: "Norma (val.)", breakMins: "Pertrauka (min.)", shorten: "Sutrumpinimas (h)", calcDetails: "Užpildykite parametrus",
+    paletteTitle: "🎨 Stilių paletė", settingsTitle: "⚙️ Meniu", langLabel: "Kalba 🌐", countryLabel: "Švenčių šalis 🌍", themeLabel: "Tema 🎨", fontLabel: "Šriftas 🔤", zoomLabel: "Teksto mastelis:", close: "Uždaryti", done: "Atlikta",
+    noteLabel: "Pastaba:", save: "Išsaugoti", clear: "Išvalyti", noEvents: "Įrašų nėra", preHolText: "-1val", preHolFull: "Sutrumpinta diena (-1val)",
+    ctyLV: "Latvija 🇱🇻", ctyDE: "Vokietija 🇩🇪", ctyEE: "Estija 🇪🇪", ctyLT: "Lietuva 🇱🇹", ctyPL: "Lenkija 🇵🇱", ctyNONE: "Be švenčių 🚫",
+    themeBlueLight: "Šviesiai mėlyna 🩵", themeBlueDark: "Tamsiai mėlyna 💙", themeGreen: "Šaltas smaragdas 🌲", themeGray: "Tamsus grafitas 🩶", themeLightGray: "Dūminė pilka ☁️", themePink: "Švelni rožė 🌸", themeDefault: "Šviesi klasika ☀️", themeDark: "Gili naktis 🌙"
+  },
+  pl: {
+    cal: "📅 Kalendarz", calc: "⏱ Kalkulator", today: "📍 Dzisiaj", palette: "🎨 Paleta", import: "📂 ICS", settings: "⚙️ Menu",
+    weekdays: ["PN", "WT", "ŚR", "CZ", "PT", "SB", "ND"],
+    months: ["Styczeń", "Luty", "Marzec", "Kwiecień", "Maj", "Czerwiec", "Lipiec", "Sierpień", "Wrzesień", "Październik", "Listopad", "Grudzień"],
+    calcTitle: "⏱ Kalkulator zmiany", startWork: "Początek pracy", normHours: "Norma (godz.)", breakMins: "Przerwa (min)", shorten: "Skrócenie (g)", calcDetails: "Wypełnij parametry",
+    paletteTitle: "🎨 Paleta styli", settingsTitle: "⚙️ Menu", langLabel: "Język 🌐", countryLabel: "Kraj świąt 🌍", themeLabel: "Motyw 🎨", fontLabel: "Czcionka 🔤", zoomLabel: "Skala tekstu:", close: "Zamknij", done: "Gotowe",
+    noteLabel: "Notatka:", save: "Zapisz", clear: "Wyczyść", noEvents: "Brak wpisów", preHolText: "-1g", preHolFull: "Dzień skrócony (-1g)",
+    ctyLV: "Łotwa 🇱🇻", ctyDE: "Niemcy 🇩🇪", ctyEE: "Estonia 🇪🇪", ctyLT: "Litwa 🇱🇹", ctyPL: "Polska 🇵🇱", ctyNONE: "Bez świąt 🚫",
+    themeBlueLight: "Jasnoniebieski 🩵", themeBlueDark: "Ciemnoniebieski 💙", themeGreen: "Zimny szmaragd 🌲", themeGray: "Ciemny grafit 🩶", themeLightGray: "Dymny szary ☁️", themePink: "Delikatna róża 🌸", themeDefault: "Jasna klasyka ☀️", themeDark: "Głęboka noc 🌙"
   }
 };
 
@@ -586,6 +553,7 @@ function applyLanguage() {
   document.getElementById('txtNormHours').innerText = t.normHours;
   document.getElementById('txtBreakMins').innerText = t.breakMins;
   document.getElementById('txtShorten').innerText = t.shorten;
+  document.getElementById('calcDetails').innerText = t.calcDetails;
   
   document.getElementById('txtPaletteTitle').innerText = t.paletteTitle;
   document.getElementById('txtSettingsTitle').innerText = t.settingsTitle;
@@ -593,11 +561,28 @@ function applyLanguage() {
   document.getElementById('txtCountryLabel').innerText = t.countryLabel;
   document.getElementById('txtThemeLabel').innerText = t.themeLabel;
   document.getElementById('txtFontLabel').innerText = t.fontLabel;
+  document.getElementById('txtZoomLabel').childNodes[0].nodeValue = t.zoomLabel + " ";
+  document.getElementById('txtNoteLabel').innerText = t.noteLabel;
+  document.getElementById('btnSave').innerText = t.save;
+  document.getElementById('btnClear').innerText = t.clear;
   document.getElementById('btnCloseModal').innerText = t.close;
   document.getElementById('btnClosePalette').innerText = t.done;
 
+  document.getElementById('optCtyLV').innerText = t.ctyLV;
+  document.getElementById('optCtyDE').innerText = t.ctyDE;
+  document.getElementById('optCtyEE').innerText = t.ctyEE;
+  document.getElementById('optCtyLT').innerText = t.ctyLT;
+  document.getElementById('optCtyPL').innerText = t.ctyPL;
+  document.getElementById('optCtyNONE').innerText = t.ctyNONE;
+
   document.getElementById('optThemeBlueLight').innerText = t.themeBlueLight;
   document.getElementById('optThemeBlueDark').innerText = t.themeBlueDark;
+  document.getElementById('optThemeGreen').innerText = t.themeGreen;
+  document.getElementById('optThemeGray').innerText = t.themeGray;
+  document.getElementById('optThemeLightGray').innerText = t.themeLightGray;
+  document.getElementById('optThemePink').innerText = t.themePink;
+  document.getElementById('optThemeDefault').innerText = t.themeDefault;
+  document.getElementById('optThemeDark').innerText = t.themeDark;
 
   let trH = document.getElementById('weekdaysHeader');
   trH.innerHTML = '';
