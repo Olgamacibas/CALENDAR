@@ -69,6 +69,15 @@
     --bg-gradient: radial-gradient(circle at center, #1e1e1e 0%, #050505 100%);
   }
 
+  [data-theme="default"] {
+    --bg-color: #f0f2f5; --card-bg: #ffffff; --primary: #1a1a1a;
+    --text-color: #212529; --subtext: #6c757d; --border-color: #dee2e6; 
+    --input-bg: #f8f9fa; --accent: #2b3e50; --accent-text: #ffffff;
+    --today-bg: #e2e6ea; --today-border: #1a1a1a; --note-bg: #e9ecef; 
+    --note-text: #212529; --main-shadow: 0 16px 32px rgba(0, 0, 0, 0.12);
+    --bg-gradient: radial-gradient(circle at center, #ffffff 0%, #e4e7eb 100%);
+  }
+
   [data-theme="green"] {
     --bg-color: #003637; --card-bg: #006B6C; --primary: #ffffff;
     --text-color: #e0f2f1; --subtext: #80cbc4; --border-color: #00897b; 
@@ -188,7 +197,7 @@
   .pre-hol .day-cell { border: 2px solid var(--pre-border) !important; }
   .work-sat .day-cell { border: 2px solid var(--work-border) !important; }
 
-  .weekend { background-color: rgba(255, 255, 255, 0.06); }
+  .weekend { background-color: rgba(0, 0, 0, 0.03); }
   .weekend .day-num { color: #e74c3c; }
 
   .bottom-bar {
@@ -278,7 +287,7 @@
           <input type="number" id="workHours" value="8.5" step="0.5" oninput="calculateShift()">
         </div>
         <div class="input-group">
-          <label id="txtBreakMins"> Паузы (мин)</label>
+          <label id="txtBreakMins">Обед / Паузы (мин)</label>
           <input type="number" id="breakMins" value="30" step="5" oninput="calculateShift()">
         </div>
         <div class="input-group">
@@ -336,16 +345,16 @@
     <div class="input-group" style="margin-bottom: 10px;">
       <label id="txtFontLabel">Шрифт 🔤</label>
       <select id="fontSelect" onchange="changeFont(this.value)">
-        <option value="'Roboto', sans-serif">Roboto </option>
-        <option value="'Open Sans', sans-serif">Open Sans </option>
-        <option value="'Montserrat', sans-serif">Montserrat </option>
-        <option value="'Lato', sans-serif">Lato </option>
-        <option value="'Inter', sans-serif">Inter </option>
-        <option value="'Nunito', sans-serif">Nunito </option>
-        <option value="'Ubuntu', sans-serif">Ubuntu </option>
-        <option value="'Comfortaa', cursive">Comfortaa </option>
-        <option value="'Playfair Display', serif">Playfair Display </option>
-        <option value="'Merriweather', serif">Merriweather </option>
+        <option value="'Roboto', sans-serif" id="optFontRoboto">Roboto</option>
+        <option value="'Open Sans', sans-serif" id="optFontOpenSans">Open Sans</option>
+        <option value="'Montserrat', sans-serif" id="optFontMontserrat">Montserrat</option>
+        <option value="'Lato', sans-serif" id="optFontLato">Lato</option>
+        <option value="'Inter', sans-serif" id="optFontInter">Inter</option>
+        <option value="'Nunito', sans-serif" id="optFontNunito">Nunito</option>
+        <option value="'Ubuntu', sans-serif" id="optFontUbuntu">Ubuntu</option>
+        <option value="'Comfortaa', cursive" id="optFontComfortaa">Comfortaa</option>
+        <option value="'Playfair Display', serif" id="optFontPlayfair">Playfair Display</option>
+        <option value="'Merriweather', serif" id="optFontMerriweather">Merriweather</option>
       </select>
     </div>
 
@@ -357,14 +366,14 @@
     <div class="input-group" style="margin-bottom: 14px;">
       <label id="txtThemeLabel">Тема оформления 🎨</label>
       <select id="themeSelect" onchange="changeTheme(this.value)">
-        <option value="blue-light" id="optThemeBlueLight">Голубая </option>
-        <option value="blue-dark" id="optThemeBlueDark">Синяя </option>
-        <option value="green" id="optThemeGreen">Холодный изумруд </option>
-        <option value="gray" id="optThemeGray">Темный графит </option>
-        <option value="light-gray" id="optThemeLightGray">Дымчато-серый </option>
-        <option value="pink" id="optThemePink">Нежная роза </option>
-        <option value="default" id="optThemeDefault">Светлая классика </option>
-        <option value="dark" id="optThemeDark">Глубокая ночь </option>
+        <option value="blue-light" id="optThemeBlueLight">Голубая</option>
+        <option value="blue-dark" id="optThemeBlueDark">Синяя</option>
+        <option value="green" id="optThemeGreen">Холодный изумруд</option>
+        <option value="gray" id="optThemeGray">Темный графит</option>
+        <option value="light-gray" id="optThemeLightGray">Дымчато-серый</option>
+        <option value="pink" id="optThemePink">Нежная роза</option>
+        <option value="default" id="optThemeDefault">Светлая</option>
+        <option value="dark" id="optThemeDark">Темная</option>
       </select>
     </div>
     
@@ -415,36 +424,48 @@ const holidaysData = {
       "12-26": "2. Ziemassvētki", "12-31": "Vecgada diena"
     },
     preHolidays: ["4-2", "4-30", "6-22", "11-17", "12-23", "12-30"],
-    workSaturdays: { "1-17": "Отработка", "6-27": "Отработка" }
+    workSaturdays: ["1-17", "6-27"]
   },
   DE: {
     holidays: { "1-1": "Neujahr", "5-1": "Tag der Arbeit", "10-3": "Tag der Dt. Einheit", "12-25": "1. Weihnachtstag", "12-26": "2. Weihnachtstag" },
-    preHolidays: ["12-24", "12-31"], workSaturdays: {}
+    preHolidays: ["12-24", "12-31"], workSaturdays: []
   },
   EE: {
     holidays: { "1-1": "Uusaasta", "2-24": "Iseseisvuspäev", "5-1": "Kevadpüha", "6-23": "Võidupüha", "6-24": "Jaanipäev", "8-20": "Taasiseseisvumispäev", "12-24": "Jõululaupäev", "12-25": "1. jõulupüha", "12-26": "2. jõulupüha" },
-    preHolidays: ["2-23", "6-22", "12-23", "12-31"], workSaturdays: {}
+    preHolidays: ["2-23", "6-22", "12-23", "12-31"], workSaturdays: []
   },
   LT: {
     holidays: { "1-1": "Naujieji metai", "2-16": "Valstybės atkūrimo d.", "3-11": "Nepriklausomybė", "5-1": "Darbo diena", "6-24": "Joninės", "7-6": "Mindaugo karūnavimas", "8-15": "Žolinė", "11-1": "Visų šventųjų d.", "11-2": "Vėlinės", "12-24": "Kūčios", "12-25": "1. Kalėdos", "12-26": "2. Kalėdos" },
-    preHolidays: ["2-15", "3-10", "7-5", "10-31", "12-23"], workSaturdays: {}
+    preHolidays: ["2-15", "3-10", "7-5", "10-31", "12-23"], workSaturdays: []
   },
   PL: {
     holidays: { "1-1": "Nowy Rok", "1-6": "Trzech Króli", "5-1": "Święto Pracy", "5-3": "Święto Konstytucji", "8-15": "Wniebowzięcie NMP", "11-1": "Wszystkich Świętych", "11-11": "Święto Niepodległości", "12-25": "Boże Narodzenie", "12-26": "Drugi Dzień" },
-    preHolidays: ["4-30", "5-2", "11-10", "12-24", "12-31"], workSaturdays: {}
+    preHolidays: ["4-30", "5-2", "11-10", "12-24", "12-31"], workSaturdays: []
   }
 };
 
 const translations = {
+  en: {
+    cal: "📅 Calendar", calc: "⏱ Calculator", today: "📍 Today", palette: "🎨 Palette", import: "📂 ICS", settings: "⚙️ Menu",
+    weekdays: ["MO", "TU", "WE", "TH", "FR", "SA", "SU"],
+    months: ["January", "February", "March", "April", "May", "June", "July", "August", "September", "October", "November", "December"],
+    calcTitle: "⏱ Shift Calculator", startWork: "Start time", normHours: "Shift hours", breakMins: "Break (min)", shorten: "Shortened (h)", calcDetails: "Fill in parameters",
+    paletteTitle: "🎨 Style Palette", settingsTitle: "⚙️ Menu", langLabel: "Language 🌐", countryLabel: "Holidays Country 🌍", themeLabel: "Theme 🎨", fontLabel: "Font 🔤", zoomLabel: "Text Scale:", close: "Close", done: "Done",
+    noteLabel: "Note:", save: "Save", clear: "Clear", noEvents: "No entries", preHolText: "-1h", preHolFull: "Shortened day (-1h)", workSatText: "Workday",
+    ctyLV: "Latvia 🇱🇻", ctyDE: "Germany 🇩🇪", ctyEE: "Estonia 🇪🇪", ctyLT: "Lithuania 🇱🇹", ctyPL: "Poland 🇵🇱", ctyNONE: "No holidays 🚫",
+    themeBlueLight: "Light Blue", themeBlueDark: "Dark Blue", themeGreen: "Cold Emerald", themeGray: "Dark Graphite", themeLightGray: "Smoky Gray", themePink: "Soft Rose", themeDefault: "Light", themeDark: "Dark",
+    fonts: { roboto: "Roboto (Classic)", openSans: "Open Sans (Soft)", montserrat: "Montserrat (Modern)", lato: "Lato (Elegant)", inter: "Inter (Strict)", nunito: "Nunito (Rounded)", ubuntu: "Ubuntu (Corporate)", comfortaa: "Comfortaa (Art)", playfair: "Playfair Display (Serif)", merriweather: "Merriweather (Book)" }
+  },
   ru: {
     cal: "📅 Календарь", calc: "⏱ Калькулятор", today: "📍 Сегодня", palette: "🎨 Палитра", import: "📂 ICS", settings: "⚙️ Меню",
     weekdays: ["ПН", "ВТ", "СР", "ЧТ", "ПТ", "СБ", "ВС"],
     months: ["Январь", "Февраль", "Март", "Апрель", "Май", "Июнь", "Июль", "Август", "Сентябрь", "Октябрь", "Ноябрь", "Декабрь"],
     calcTitle: "⏱ Калькулятор смены", startWork: "Начало работы", normHours: "Норма (часов)", breakMins: "Обед / Паузы (мин)", shorten: "Сокращение (ч)", calcDetails: "Заполните параметры",
     paletteTitle: "🎨 Палитра стилей", settingsTitle: "⚙️ Меню", langLabel: "Язык интерфейса 🌐", countryLabel: "Страна праздников 🌍", themeLabel: "Тема оформления 🎨", fontLabel: "Шрифт 🔤", zoomLabel: "Масштаб текста:", close: "Закрыть", done: "Готово",
-    noteLabel: "Заметка:", save: "Сохранить", clear: "Очистить", noEvents: "Записей нет", preHolText: "-1ч", preHolFull: "Сокращенный день (-1ч)",
+    noteLabel: "Заметка:", save: "Сохранить", clear: "Очистить", noEvents: "Записей нет", preHolText: "-1ч", preHolFull: "Сокращенный день (-1ч)", workSatText: "Отработка",
     ctyLV: "Латвия 🇱🇻", ctyDE: "Германия 🇩🇪", ctyEE: "Эстония 🇪🇪", ctyLT: "Литва 🇱🇹", ctyPL: "Польша 🇵🇱", ctyNONE: "Без праздников 🚫",
-    themeBlueLight: "Голубая 🩵", themeBlueDark: "Синяя 💙", themeGreen: "Холодный изумруд 🌲", themeGray: "Темный графит 🩶", themeLightGray: "Дымчато-серый ☁️", themePink: "Нежная роза 🌸", themeDefault: "Светлая классика ☀️", themeDark: "Глубокая ночь 🌙"
+    themeBlueLight: "Голубая", themeBlueDark: "Синяя", themeGreen: "Холодный изумруд", themeGray: "Темный графит", themeLightGray: "Дымчато-серый", themePink: "Нежная роза", themeDefault: "Светлая", themeDark: "Темная",
+    fonts: { roboto: "Roboto (Классический)", openSans: "Open Sans (Мягкий)", montserrat: "Montserrat (Современный)", lato: "Lato (Элегантный)", inter: "Inter (Строгий)", nunito: "Nunito (Округлый)", ubuntu: "Ubuntu (Корпоративный)", comfortaa: "Comfortaa (Арт)", playfair: "Playfair Display (Засечки)", merriweather: "Merriweather (Книжный)" }
   },
   lv: {
     cal: "📅 Kalendārs", calc: "⏱ Kalkulators", today: "📍 Šodiena", palette: "🎨 Palete", import: "📂 ICS", settings: "⚙️ Izvēlne",
@@ -452,19 +473,10 @@ const translations = {
     months: ["Janvāris", "Februāris", "Marts", "Aprīlis", "Maijs", "Jūnijs", "Jūlijs", "Augusts", "Septembris", "Oktobris", "Novembris", "Decembris"],
     calcTitle: "⏱ Maiņu kalkulators", startWork: "Darba sākums", normHours: "Norma (stundas)", breakMins: "Pārtraukums (min)", shorten: "Saīsinājums (st)", calcDetails: "Aizpildiet parametrus",
     paletteTitle: "🎨 Stilu palete", settingsTitle: "⚙️ Izvēlne", langLabel: "Saskarnes valoda 🌐", countryLabel: "Svētku valsts 🌍", themeLabel: "Tēma 🎨", fontLabel: "Šrifts 🔤", zoomLabel: "Teksta mērogs:", close: "Aizvērt", done: "Gatavs",
-    noteLabel: "Piezīme:", save: "Saglabāt", clear: "Notīrīt", noEvents: "Nav ierakstu", preHolText: "-1st", preHolFull: "Saīsinātā diena (-1st)",
+    noteLabel: "Piezīme:", save: "Saglabāt", clear: "Notīrīt", noEvents: "Nav ierakstu", preHolText: "-1st", preHolFull: "Saīsinātā diena (-1st)", workSatText: "Darba diena",
     ctyLV: "Latvija 🇱🇻", ctyDE: "Vācija 🇩🇪", ctyEE: "Igaunija 🇪🇪", ctyLT: "Lietuva 🇱🇹", ctyPL: "Polija 🇵🇱", ctyNONE: "Bez svētkiem 🚫",
-    themeBlueLight: "Gaiši zila 🩵", themeBlueDark: "Tumši zila 💙", themeGreen: "Aukstais smaragds 🌲", themeGray: "Tumšais grafīts 🩶", themeLightGray: "Dūmakaini pelēks ☁️", themePink: "Maigā roze 🌸", themeDefault: "Gaišā klasika ☀️", themeDark: "Dziļā nakts 🌙"
-  },
-  en: {
-    cal: "📅 Calendar", calc: "⏱ Calculator", today: "📍 Today", palette: "🎨 Palette", import: "📂 ICS", settings: "⚙️ Menu",
-    weekdays: ["MO", "TU", "WE", "TH", "FR", "SA", "SU"],
-    months: ["January", "February", "March", "April", "May", "June", "July", "August", "September", "October", "November", "December"],
-    calcTitle: "⏱ Shift Calculator", startWork: "Start time", normHours: "Shift hours", breakMins: "Break (min)", shorten: "Shortened (h)", calcDetails: "Fill in parameters",
-    paletteTitle: "🎨 Style Palette", settingsTitle: "⚙️ Menu", langLabel: "Language 🌐", countryLabel: "Holidays Country 🌍", themeLabel: "Theme 🎨", fontLabel: "Font 🔤", zoomLabel: "Text Scale:", close: "Close", done: "Done",
-    noteLabel: "Note:", save: "Save", clear: "Clear", noEvents: "No entries", preHolText: "-1h", preHolFull: "Shortened day (-1h)",
-    ctyLV: "Latvia 🇱🇻", ctyDE: "Germany 🇩🇪", ctyEE: "Estonia 🇪🇪", ctyLT: "Lithuania 🇱🇹", ctyPL: "Poland 🇵🇱", ctyNONE: "No holidays 🚫",
-    themeBlueLight: "Light Blue 🩵", themeBlueDark: "Dark Blue 💙", themeGreen: "Cold Emerald 🌲", themeGray: "Dark Graphite 🩶", themeLightGray: "Smoky Gray ☁️", themePink: "Soft Rose 🌸", themeDefault: "Light Classic ☀️", themeDark: "Deep Night 🌙"
+    themeBlueLight: "Gaiši zila", themeBlueDark: "Tumši zila", themeGreen: "Aukstais smaragds", themeGray: "Tumšais grafīts", themeLightGray: "Dūmakaini pelēks", themePink: "Maigā roze", themeDefault: "Gaiša", themeDark: "Tumša",
+    fonts: { roboto: "Roboto (Klasisks)", openSans: "Open Sans (Mīksts)", montserrat: "Montserrat (Mūsdienīgs)", lato: "Lato (Elegants)", inter: "Inter (Stingrs)", nunito: "Nunito (Noapaļots)", ubuntu: "Ubuntu (Korporatīvs)", comfortaa: "Comfortaa (Mākslas)", playfair: "Playfair Display (Ar serifiems)", merriweather: "Merriweather (Grāmatu)" }
   },
   de: {
     cal: "📅 Kalender", calc: "⏱ Rechner", today: "📍 Heute", palette: "🎨 Palette", import: "📂 ICS", settings: "⚙️ Menü",
@@ -472,9 +484,10 @@ const translations = {
     months: ["Januar", "Februar", "März", "April", "Mai", "Juni", "Juli", "August", "September", "Oktober", "November", "Dezember"],
     calcTitle: "⏱ Schichtrechner", startWork: "Arbeitsbeginn", normHours: "Sollzeit (Std)", breakMins: "Pause (Min)", shorten: "Verkürzung (Std)", calcDetails: "Parameter ausfüllen",
     paletteTitle: "🎨 Stil-Palette", settingsTitle: "⚙️ Menü", langLabel: "Sprache 🌐", countryLabel: "Feiertage Land 🌍", themeLabel: "Thema 🎨", fontLabel: "Schriftart 🔤", zoomLabel: "Textskalierung:", close: "Schließen", done: "Fertig",
-    noteLabel: "Notiz:", save: "Speichern", clear: "Löschen", noEvents: "Keine Einträge", preHolText: "-1St", preHolFull: "Verkürzter Tag (-1St)",
+    noteLabel: "Notiz:", save: "Speichern", clear: "Löschen", noEvents: "Keine Einträge", preHolText: "-1St", preHolFull: "Verkürzter Tag (-1St)", workSatText: "Arbeitstag",
     ctyLV: "Lettland 🇱🇻", ctyDE: "Deutschland 🇩🇪", ctyEE: "Estland 🇪🇪", ctyLT: "Litauen 🇱🇹", ctyPL: "Polen 🇵🇱", ctyNONE: "Keine Feiertage 🚫",
-    themeBlueLight: "Hellblau 🩵", themeBlueDark: "Dunkelblau 💙", themeGreen: "Kühler Smaragd 🌲", themeGray: "Dunkelgraphit 🩶", themeLightGray: "Rauchgrau ☁️", themePink: "Zarte Rose 🌸", themeDefault: "Helle Klassik ☀️", themeDark: "Tiefe Nacht 🌙"
+    themeBlueLight: "Hellblau", themeBlueDark: "Dunkelblau", themeGreen: "Kühler Smaragd", themeGray: "Dunkelgraphit", themeLightGray: "Rauchgrau", themePink: "Zarte Rose", themeDefault: "Hell", themeDark: "Dunkel",
+    fonts: { roboto: "Roboto (Klassisch)", openSans: "Open Sans (Weich)", montserrat: "Montserrat (Modern)", lato: "Lato (Elegant)", inter: "Inter (Strenge)", nunito: "Nunito (Abgerundet)", ubuntu: "Ubuntu (Corporate)", comfortaa: "Comfortaa (Kunst)", playfair: "Playfair Display (Serif)", merriweather: "Merriweather (Buch)" }
   },
   et: {
     cal: "📅 Kalender", calc: "⏱ Kalkulaator", today: "📍 Täna", palette: "🎨 Palett", import: "📂 ICS", settings: "⚙️ Menüü",
@@ -482,9 +495,10 @@ const translations = {
     months: ["Jaanuar", "Veebruar", "Märts", "Aprill", "Mai", "Juuni", "Juuli", "August", "September", "Oktoober", "November", "Detsember"],
     calcTitle: "⏱ Vahetuse kalkulaator", startWork: "Töö algus", normHours: "Norm (tundi)", breakMins: "Lõuna (min)", shorten: "Lühendamine (h)", calcDetails: "Täitke parameetrid",
     paletteTitle: "🎨 Stiilipalett", settingsTitle: "⚙️ Menüü", langLabel: "Keel 🌐", countryLabel: "Pühade riik 🌍", themeLabel: "Teema 🎨", fontLabel: "Font 🔤", zoomLabel: "Teksti mastaap:", close: "Sulge", done: "Valmis",
-    noteLabel: "Märge:", save: "Salvesta", clear: "Puhasta", noEvents: "Kirjeid pole", preHolText: "-1t", preHolFull: "Lühendatud päev (-1t)",
+    noteLabel: "Märge:", save: "Salvesta", clear: "Puhasta", noEvents: "Kirjeid pole", preHolText: "-1t", preHolFull: "Lühendatud päev (-1t)", workSatText: "Tööpäev",
     ctyLV: "Läti 🇱🇻", ctyDE: "Saksamaa 🇩🇪", ctyEE: "Eesti 🇪🇪", ctyLT: "Leedu 🇱🇹", ctyPL: "Poola 🇵🇱", ctyNONE: "Pühasid pole 🚫",
-    themeBlueLight: "Helebesinine 🩵", themeBlueDark: "Tumesinine 💙", themeGreen: "Külm smaragd 🌲", themeGray: "Tume grafiit 🩶", themeLightGray: "Suitsuhall ☁️", themePink: "Õrn roos 🌸", themeDefault: "Hele klassika ☀️", themeDark: "Sügav öö 🌙"
+    themeBlueLight: "Helebesinine", themeBlueDark: "Tumesinine", themeGreen: "Külm smaragd", themeGray: "Tume grafiit", themeLightGray: "Suitsuhall", themePink: "Õrn roos", themeDefault: "Hele", themeDark: "Tume",
+    fonts: { roboto: "Roboto (Klassikaline)", openSans: "Open Sans (Pehme)", montserrat: "Montserrat (Kaasaegne)", lato: "Lato (Elegantne)", inter: "Inter (Range)", nunito: "Nunito (Ümar)", ubuntu: "Ubuntu (Korporatiivne)", comfortaa: "Comfortaa (Kunst)", playfair: "Playfair Display (Seriifidega)", merriweather: "Merriweather (Raamat)" }
   },
   lt: {
     cal: "📅 Kalendorius", calc: "⏱ Skaičiuoklė", today: "📍 Šiandien", palette: "🎨 Paletė", import: "📂 ICS", settings: "⚙️ Meniu",
@@ -492,9 +506,10 @@ const translations = {
     months: ["Sausis", "Vasaris", "Kovas", "Balandis", "Gegužė", "Birželis", "Liepa", "Rugpjūtis", "Rugsėjis", "Spalis", "Lapkritis", "Gruodis"],
     calcTitle: "⏱ Pamainos skaičiuoklė", startWork: "Darbo pradžia", normHours: "Norma (val.)", breakMins: "Pertrauka (min.)", shorten: "Sutrumpinimas (h)", calcDetails: "Užpildykite parametrus",
     paletteTitle: "🎨 Stilių paletė", settingsTitle: "⚙️ Meniu", langLabel: "Kalba 🌐", countryLabel: "Švenčių šalis 🌍", themeLabel: "Tema 🎨", fontLabel: "Šriftas 🔤", zoomLabel: "Teksto mastelis:", close: "Uždaryti", done: "Atlikta",
-    noteLabel: "Pastaba:", save: "Išsaugoti", clear: "Išvalyti", noEvents: "Įrašų nėra", preHolText: "-1val", preHolFull: "Sutrumpinta diena (-1val)",
+    noteLabel: "Pastaba:", save: "Išsaugoti", clear: "Išvalyti", noEvents: "Įrašų nėra", preHolText: "-1val", preHolFull: "Sutrumpinta diena (-1val)", workSatText: "Darbo diena",
     ctyLV: "Latvija 🇱🇻", ctyDE: "Vokietija 🇩🇪", ctyEE: "Estija 🇪🇪", ctyLT: "Lietuva 🇱🇹", ctyPL: "Lenkija 🇵🇱", ctyNONE: "Be švenčių 🚫",
-    themeBlueLight: "Šviesiai mėlyna 🩵", themeBlueDark: "Tamsiai mėlyna 💙", themeGreen: "Šaltas smaragdas 🌲", themeGray: "Tamsus grafitas 🩶", themeLightGray: "Dūminė pilka ☁️", themePink: "Švelni rožė 🌸", themeDefault: "Šviesi klasika ☀️", themeDark: "Gili naktis 🌙"
+    themeBlueLight: "Šviesiai mėlyna", themeBlueDark: "Tamsiai mėlyna", themeGreen: "Šaltas smaragdas", themeGray: "Tamsus grafitas", themeLightGray: "Dūminė pilka", themePink: "Švelni rožė", themeDefault: "Šviesi", themeDark: "Tamsi",
+    fonts: { roboto: "Roboto (Klasikinis)", openSans: "Open Sans (Minkštas)", montserrat: "Montserrat (Modernus)", lato: "Lato (Elegantiškas)", inter: "Inter (Griežtas)", nunito: "Nunito (Suapvalintas)", ubuntu: "Ubuntu (Korporatyvinis)", comfortaa: "Comfortaa (Meno)", playfair: "Playfair Display (Su užkarpa)", merriweather: "Merriweather (Knyginis)" }
   },
   pl: {
     cal: "📅 Kalendarz", calc: "⏱ Kalkulator", today: "📍 Dzisiaj", palette: "🎨 Paleta", import: "📂 ICS", settings: "⚙️ Menu",
@@ -502,11 +517,16 @@ const translations = {
     months: ["Styczeń", "Luty", "Marzec", "Kwiecień", "Maj", "Czerwiec", "Lipiec", "Sierpień", "Wrzesień", "Październik", "Listopad", "Grudzień"],
     calcTitle: "⏱ Kalkulator zmiany", startWork: "Początek pracy", normHours: "Norma (godz.)", breakMins: "Przerwa (min)", shorten: "Skrócenie (g)", calcDetails: "Wypełnij parametry",
     paletteTitle: "🎨 Paleta styli", settingsTitle: "⚙️ Menu", langLabel: "Język 🌐", countryLabel: "Kraj świąt 🌍", themeLabel: "Motyw 🎨", fontLabel: "Czcionka 🔤", zoomLabel: "Skala tekstu:", close: "Zamknij", done: "Gotowe",
-    noteLabel: "Notatka:", save: "Zapisz", clear: "Wyczyść", noEvents: "Brak wpisów", preHolText: "-1g", preHolFull: "Dzień skrócony (-1g)",
+    noteLabel: "Notatka:", save: "Zapisz", clear: "Wyczyść", noEvents: "Brak wpisów", preHolText: "-1g", preHolFull: "Dzień skrócony (-1g)", workSatText: "Dzień roboczy",
     ctyLV: "Łotwa 🇱🇻", ctyDE: "Niemcy 🇩🇪", ctyEE: "Estonia 🇪🇪", ctyLT: "Litwa 🇱🇹", ctyPL: "Polska 🇵🇱", ctyNONE: "Bez świąt 🚫",
-    themeBlueLight: "Jasnoniebieski 🩵", themeBlueDark: "Ciemnoniebieski 💙", themeGreen: "Zimny szmaragd 🌲", themeGray: "Ciemny grafit 🩶", themeLightGray: "Dymny szary ☁️", themePink: "Delikatna róża 🌸", themeDefault: "Jasna klasyka ☀️", themeDark: "Głęboka noc 🌙"
+    themeBlueLight: "Jasnoniebieski", themeBlueDark: "Ciemnoniebieski", themeGreen: "Zimny szmaragd", themeGray: "Ciemny grafit", themeLightGray: "Dymny szary", themePink: "Delikatna róża", themeDefault: "Jasna", themeDark: "Ciemna",
+    fonts: { roboto: "Roboto (Klasyczny)", openSans: "Open Sans (Miękki)", montserrat: "Montserrat (Nowoczesny)", lato: "Lato (Elegancki)", inter: "Inter (Surowy)", nunito: "Nunito (Zaokrąglony)", ubuntu: "Ubuntu (Korporacyjny)", comfortaa: "Comfortaa (Artystyczny)", playfair: "Playfair Display (Szeryfowy)", merriweather: "Merriweather (Książkowy)" }
   }
 };
+
+function getT() {
+  return translations[currentLang] || translations['en'];
+}
 
 let currentLang = localStorage.getItem('myCalendarLang') || 'ru';
 let now = new Date();
@@ -540,7 +560,7 @@ function init() {
 }
 
 function applyLanguage() {
-  let t = translations[currentLang] || translations['ru'];
+  let t = getT();
   document.getElementById('tabBtnCal').innerText = t.cal;
   document.getElementById('tabBtnCalc').innerText = t.calc;
   document.getElementById('btnTodayBar').innerText = t.today;
@@ -583,6 +603,18 @@ function applyLanguage() {
   document.getElementById('optThemePink').innerText = t.themePink;
   document.getElementById('optThemeDefault').innerText = t.themeDefault;
   document.getElementById('optThemeDark').innerText = t.themeDark;
+
+  let f = t.fonts || translations['en'].fonts;
+  document.getElementById('optFontRoboto').innerText = f.roboto;
+  document.getElementById('optFontOpenSans').innerText = f.openSans;
+  document.getElementById('optFontMontserrat').innerText = f.montserrat;
+  document.getElementById('optFontLato').innerText = f.lato;
+  document.getElementById('optFontInter').innerText = f.inter;
+  document.getElementById('optFontNunito').innerText = f.nunito;
+  document.getElementById('optFontUbuntu').innerText = f.ubuntu;
+  document.getElementById('optFontComfortaa').innerText = f.comfortaa;
+  document.getElementById('optFontPlayfair').innerText = f.playfair;
+  document.getElementById('optFontMerriweather').innerText = f.merriweather;
 
   let trH = document.getElementById('weekdaysHeader');
   trH.innerHTML = '';
@@ -634,7 +666,7 @@ function populateYears() {
 }
 
 function updateCalendar() {
-  let t = translations[currentLang] || translations['ru'];
+  let t = getT();
   document.getElementById('monthTitleText').innerText = t.months[currentMonth];
   document.getElementById('yearSelect').value = currentYear;
 
@@ -645,7 +677,7 @@ function updateCalendar() {
   let startingDay = (firstDay === 0) ? 6 : firstDay - 1; 
   let monthLength = new Date(currentYear, currentMonth + 1, 0).getDate();
 
-  let cData = holidaysData[selectedCountry] || { holidays: {}, preHolidays: [], workSaturdays: {} };
+  let cData = holidaysData[selectedCountry] || { holidays: {}, preHolidays: [], workSaturdays: [] };
 
   let date = 1;
   while (date <= monthLength) {
@@ -670,7 +702,7 @@ function updateCalendar() {
           cell.className += ' holiday';
         } else if (cData.preHolidays.includes(shortKey)) {
           cell.className += ' pre-hol';
-        } else if (cData.workSaturdays[shortKey]) {
+        } else if (cData.workSaturdays.includes(shortKey)) {
           cell.className += ' work-sat';
         }
 
@@ -695,10 +727,10 @@ function updateCalendar() {
           pLabel.innerText = t.preHolText || "-1h";
           cellDiv.appendChild(pLabel);
           cellDiv.classList.add('has-text');
-        } else if (cData.workSaturdays[shortKey]) {
+        } else if (cData.workSaturdays.includes(shortKey)) {
           let wLabel = document.createElement('div');
           wLabel.className = 'day-label work-sat-label';
-          wLabel.innerText = cData.workSaturdays[shortKey];
+          wLabel.innerText = t.workSatText || "Work";
           cellDiv.appendChild(wLabel);
           cellDiv.classList.add('has-text');
         }
@@ -776,14 +808,14 @@ function calculateShift() {
 
 function openPopover(key, dateNum) {
   activeKey = key;
-  let t = translations[currentLang] || translations['ru'];
+  let t = getT();
   document.getElementById('popoverTitle').innerText = `${dateNum}.${currentMonth + 1}.${currentYear}`;
   
   let eventList = document.getElementById('eventList');
   eventList.innerHTML = '';
   
   let shortKey = `${currentMonth + 1}-${dateNum}`;
-  let cData = holidaysData[selectedCountry] || { holidays: {}, preHolidays: [], workSaturdays: {} };
+  let cData = holidaysData[selectedCountry] || { holidays: {}, preHolidays: [], workSaturdays: [] };
   let hasEvents = false;
 
   if (cData.holidays[shortKey]) {
@@ -802,10 +834,10 @@ function openPopover(key, dateNum) {
     hasEvents = true;
   }
 
-  if (cData.workSaturdays[shortKey]) {
+  if (cData.workSaturdays.includes(shortKey)) {
     let item = document.createElement('div');
     item.className = 'event-item work-sat-label';
-    item.innerText = cData.workSaturdays[shortKey];
+    item.innerText = t.workSatText;
     eventList.appendChild(item);
     hasEvents = true;
   }
