@@ -123,14 +123,18 @@
     background-attachment: fixed;
     color: var(--text-color);
     -webkit-tap-highlight-color: transparent; 
-    display: flex; flex-direction: column; align-items: center;
+    display: flex; flex-direction: column; align-items: center; justify-content: center;
+    min-height: 100vh;
+    margin: 0;
+    box-sizing: border-box;
     font-size: calc(14px * var(--font-scale));
   }
 
-  .container { width: 100%; max-width: 640px; margin: 0 auto; padding: 12px 8px 90px 8px; }
+  .container { width: 100%; max-width: 640px; margin: 0 auto; padding: 12px 8px 90px 8px; box-sizing: border-box; }
   .card {
     background: var(--card-bg); border-radius: 18px; padding: 12px 8px;
     box-shadow: var(--main-shadow); width: 100%; border: 1px solid rgba(255, 255, 255, 0.08);
+    box-sizing: border-box;
   }
 
   .view-section { display: none; flex-direction: column; width: 100%; align-items: center; }
