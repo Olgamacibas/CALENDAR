@@ -133,7 +133,7 @@
 
   html, body { min-height: 100vh; margin: 0; padding: 0; }
   
-  body {
+ body {
     font-family: var(--font-family);
     background-color: var(--bg-color);
     background-image: var(--bg-gradient); 
@@ -143,23 +143,23 @@
     display: flex; 
     flex-direction: column; 
     align-items: center; 
-    justify-content: flex-start;
+    justify-content: center;
     min-height: 100vh;
     margin: 0;
     box-sizing: border-box;
     font-size: calc(14px * var(--font-scale));
   }
 
-  /* Карточка отступает по 10% сверху и снизу (с учетом панели) */
   .container { 
     width: 100%; 
     max-width: 640px; 
     margin: 0 auto; 
-    padding-top: 10vh; /* 10% воздуха сверху */
-    padding-bottom: 10vh; /* 10% воздуха снизу */
-    padding-left: 8px;
-    padding-right: 8px;
+    padding: 12px 8px 80px 8px; /* Отступ снизу под нижнюю панель */
     box-sizing: border-box; 
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    justify-content: center; /* Центрирует карточку ровно посередине экрана */
   }
 
   .card {
@@ -173,7 +173,7 @@
   }
 
   .view-section { display: none; flex-direction: column; width: 100%; align-items: center; }
-  .view-section.active { display: flex; }
+  .view-section.active { display: flex; width: 100%; }
 
   .top-header { display: flex; justify-content: space-between; align-items: center; margin-bottom: 8px; width: 100%; }
   h2 { margin: 0; font-size: calc(14px * var(--font-scale)); font-weight: 700; color: var(--primary); text-transform: uppercase; }
@@ -211,20 +211,16 @@
   .cal-table { width: 100%; border-collapse: collapse; table-layout: fixed; }
   .cal-table th { font-size: calc(12px * var(--font-scale)); color: var(--subtext); padding-bottom: 6px; font-weight: 700; text-align: center; }
   
-  /* ИЗМЕНЕНИЕ 1: Задали высоту ячейкам таблицы в % от высоты экрана */
   .cal-table td { 
     padding: 1px; 
     width: 14.28%; 
-    height: 8.5vh; 
     vertical-align: top; 
     cursor: pointer; 
     border: 1px solid var(--border-color); 
   }
 
-  /* ИЗМЕНЕНИЕ 2: Заставили карточку дня занимать 100% высоты ячейки */
   .day-cell {
-    height: 100%;
-    min-height: 100%;
+    min-height: 64px; /* Оптимальная высота ячейки под пропорции любого экрана */
     width: 100%; 
     border-radius: 4px; 
     padding: 3px 2px;
