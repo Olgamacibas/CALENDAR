@@ -866,6 +866,66 @@ function deleteNote() {
 function openPalette() { document.getElementById('paletteModal').style.display = 'flex'; }
 function openSettings() { document.getElementById('settingsModal').style.display = 'flex'; }
 function closeModal(id) { document.getElementById(id).style.display = 'none'; }
+
+ function importIcsFile(event) {
+  const file = event.target.files[0];
+  if (!file) return;
+
+  const reader = new FileReader();
+  reader.onload = function(e) {
+    const text = e.target.result;
+    
+    // 1. Склеиваем переносы строк (.ics формат)
+    const unfoldedText = text.replace(/\r\n[ \t]/g, '').replace(/\n[ \t]/g, '');
+    
+    // 2. Разбиваем на отдельное событие VEVENT
+    const events = unfoldedText.split('BEGIN:VEVENT');
+    let importedCount = 0;
+
+    for (let i = 1; i < events.length; i++) {
+      const block = events[i].split('END:VEVENT')[0];
+      
+      // Ищем название (SUMMARY)
+      const summaryMatch = block.match(/SUMMARY:(.*)/);
+      const summary = summaryMatch ? summaryMatch[1].trim() : 'Заметка';
+
+      // Ищем дату начала (DTSTART) - поддерживает все форматы Google Calendar
+      const dateMatch = block.match(/DTSTART(?:;[^:]*)?:(\d{8})/);
+      
+      if (dateMatch && dateMatch[1]) {
+        const rawDate = dateMatch[1]; // YYYYMMDD
+        const year = parseInt(rawDate.substring(0, 4), 10);
+        const month = parseInt(rawDate.substring(4, 6), 10); // 1-12
+        const day = parseInt(rawDate.substring(6, 8), 10);
+
+        const fullKey = `${year}-${month}-${day}`;
+
+        // Если для этого дня уже есть запись, дополняем её через запятую
+        if (myNotes[fullKey]) {
+          if (!myNotes[fullKey].includes(summary)) {
+            myNotes[fullKey] += `, ${summary}`;
+          }
+        } else {
+          myNotes[fullKey] = summary;
+        }
+        importedCount++;
+      }
+    }
+
+    if (importedCount > 0) {
+      localStorage.setItem('myCalendarNotes', JSON.stringify(myNotes));
+      updateCalendar();
+      alert(`Успешно импортировано событий: ${importedCount}`);
+    } else {
+      alert('Не удалось найти события в файле .ics');
+    }
+
+    // Сбрасываем значение поля, чтобы можно было загрузить тот же файл повторно
+    event.target.value = '';
+  };
+
+  reader.readAsText(file, 'UTF-8');
+}
 </script>
 </body>
 </html>
